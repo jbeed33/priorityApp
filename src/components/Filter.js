@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Filter() {
   return (
     <div className="flex flex-row w-full overflow-scroll justify-evenly">
