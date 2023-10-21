@@ -5,14 +5,19 @@ import Filter from "./components/Filter";
 import TaskContainer from "./components/TaskContainer";
 import TaskEditor from "./components/TaskEditor";
 import TaskDisplay from "./components/TaskDisplay";
+import { useState } from "react";
 
 function App() {
+  const [openTaskDisplay, isOpenTaskDisplay] = useState(true);
   return (
     <>
-      <TaskDisplay></TaskDisplay>
+      {openTaskDisplay ? (
+        <TaskDisplay isTaskDisplayOpen={isOpenTaskDisplay}></TaskDisplay>
+      ) : null}
+
       <SearchBar></SearchBar>
       <Filter></Filter>
-      <TaskContainer></TaskContainer>
+      <TaskContainer isTaskDisplayOpen={isOpenTaskDisplay}> </TaskContainer>
     </>
   );
 }

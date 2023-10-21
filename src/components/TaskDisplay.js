@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TaskDisplay() {
+export default function TaskDisplay(props) {
   return (
     <>
       <section className="absolute w-full my-auto  p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800 z-10 ">
@@ -8,7 +8,12 @@ export default function TaskDisplay() {
           <h1 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
             Feed the dog before leaving.
           </h1>
-          <button class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+          <button
+            onClick={() =>
+              props.isTaskDisplayOpen((isTaskModalOpen) => !isTaskModalOpen)
+            }
+            class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+          >
             X
           </button>
         </div>
@@ -31,9 +36,14 @@ export default function TaskDisplay() {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur.
         </p>
-        <button className=" mt-4 px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-          Edit
-        </button>
+        <div className="flex justify-around ">
+          <button className=" mt-4 px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+            Edit
+          </button>
+          <button className=" mt-4 px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600">
+            Complete
+          </button>
+        </div>
       </section>
     </>
   );
