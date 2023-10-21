@@ -4,11 +4,12 @@ import SearchBar from "./components/searchBar";
 import Filter from "./components/Filter";
 import TaskContainer from "./components/TaskContainer";
 import TaskEditor from "./components/TaskEditor";
+import TaskDisplay from "./components/TaskDisplay";
 
 function App() {
   return (
     <>
-      <TaskEditor></TaskEditor>
+      <TaskDisplay></TaskDisplay>
       <SearchBar></SearchBar>
       <Filter></Filter>
       <TaskContainer></TaskContainer>
