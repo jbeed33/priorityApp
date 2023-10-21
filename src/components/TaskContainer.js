@@ -14,7 +14,7 @@ export default function TaskContainer(props) {
             onClick={() => {
               props.toggleTaskEditor(true);
             }}
-            className=" mt-4 px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+            className=" w-8 leading-5 text-white text-xs transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
           >
             Add task
           </button>
