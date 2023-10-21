@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TaskEditor() {
+export default function TaskEditor(props) {
   return (
     <>
       <section className="absolute w-full my-auto  p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800 z-10 ">
@@ -8,7 +8,10 @@ export default function TaskEditor() {
           <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
             Add Task
           </h2>
-          <button class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+          <button
+            class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+            onClick={() => props.toggleTaskEditor(false)}
+          >
             X
           </button>
         </div>

@@ -8,16 +8,27 @@ import TaskDisplay from "./components/TaskDisplay";
 import { useState } from "react";
 
 function App() {
-  const [openTaskDisplay, isOpenTaskDisplay] = useState(true);
+  const [openTaskDisplay, isOpenTaskDisplay] = useState(false);
+  const [editTaskModal, setEditTaskModal] = useState(true);
+
   return (
     <>
       {openTaskDisplay ? (
         <TaskDisplay isTaskDisplayOpen={isOpenTaskDisplay}></TaskDisplay>
       ) : null}
 
+      {editTaskModal ? (
+        <TaskEditor toggleTaskEditor={setEditTaskModal}></TaskEditor>
+      ) : null}
+
       <SearchBar></SearchBar>
       <Filter></Filter>
-      <TaskContainer isTaskDisplayOpen={isOpenTaskDisplay}> </TaskContainer>
+      <TaskContainer
+        toggleTaskEditor={setEditTaskModal}
+        isTaskDisplayOpen={isOpenTaskDisplay}
+      >
+        {" "}
+      </TaskContainer>
     </>
   );
 }
