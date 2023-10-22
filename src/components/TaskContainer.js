@@ -21,10 +21,22 @@ export default function TaskContainer(props) {
         </div>
 
         <div className="flex flex-col h-64  overflow-scroll w-11/12  m-auto ">
-          <TaskCard isTaskDisplayOpen={props.isTaskDisplayOpen}></TaskCard>
-          <TaskCard isTaskDisplayOpen={props.isTaskDisplayOpen}></TaskCard>
-          <TaskCard isTaskDisplayOpen={props.isTaskDisplayOpen}></TaskCard>
-          <TaskCard isTaskDisplayOpen={props.isTaskDisplayOpen}></TaskCard>
+          {props.tasks.length === 0 || props.tasks === null ? (
+            <h1>No Tasks Found</h1>
+          ) : (
+            <div>
+              {props.tasks.map((task) => {
+                console.log(task);
+                return (
+                  <TaskCard
+                    title={task.title}
+                    details={task.details}
+                    isTaskDisplayOpen={props.isTaskDisplayOpen}
+                  ></TaskCard>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </>

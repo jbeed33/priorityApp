@@ -16,7 +16,7 @@ function App() {
       high: {
         tasks: [
           {
-            id: 0,
+            id: 0, //The id should be a random UUID
             priority: "high",
             status: false,
             title: "Watering the lawn",
@@ -44,13 +44,13 @@ function App() {
           },
         ],
       },
-      med: "med",
+      med: { tasks: [] },
       lo: "low",
       no: "none",
     },
   ];
 
-  console.log(data);
+  //console.log(data);
   return (
     <>
       {openTaskDisplay ? (
@@ -66,6 +66,14 @@ function App() {
       <TaskContainer
         toggleTaskEditor={setEditTaskModal}
         isTaskDisplayOpen={isOpenTaskDisplay}
+        tasks={data[0].high.tasks}
+      >
+        {" "}
+      </TaskContainer>
+      <TaskContainer
+        toggleTaskEditor={setEditTaskModal}
+        isTaskDisplayOpen={isOpenTaskDisplay}
+        tasks={data[0].med.tasks}
       >
         {" "}
       </TaskContainer>

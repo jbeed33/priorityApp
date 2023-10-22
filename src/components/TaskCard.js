@@ -11,7 +11,7 @@ export default function TaskCard(props) {
       >
         <div className="flex flex-row align-middle justify-between">
           <h2 class=" w-3/4 mt-2 text-lg  font-semibold text-gray-800 dark:text-white md:mt-0 whitespace-nowrap text-ellipsis">
-            Watering plants For better...
+            {props.title}
           </h2>
           <button>
             <svg
@@ -32,8 +32,7 @@ export default function TaskCard(props) {
         </div>
 
         <p class=" text-xs text-gray-600 dark:text-gray-200 text-ellipsis h-24">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores
-          deserunt ea doloremque natus
+          {props.details}
         </p>
       </div>
     </>
