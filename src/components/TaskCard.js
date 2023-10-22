@@ -5,13 +5,14 @@ export default function TaskCard(props) {
     <>
       <div
         class="w-full max-w-md pl-4 mb-2  rounded-lg shadow-lg dark:bg-gray-800 h-20 bg-slate-400"
-        onClick={() =>
-          props.isTaskDisplayOpen((isTaskModalOpen) => !isTaskModalOpen)
-        }
+        onClick={() => {
+          props.setTaskToDisplay(() => props.task);
+          props.isTaskDisplayOpen((isTaskModalOpen) => !isTaskModalOpen);
+        }}
       >
         <div className="flex flex-row align-middle justify-between">
           <h2 class=" w-3/4 mt-2 text-lg  font-semibold text-gray-800 dark:text-white md:mt-0 whitespace-nowrap text-ellipsis">
-            {props.title}
+            {props.task.title}
           </h2>
           <button>
             <svg
@@ -32,7 +33,7 @@ export default function TaskCard(props) {
         </div>
 
         <p class=" text-xs text-gray-600 dark:text-gray-200 text-ellipsis h-24">
-          {props.details}
+          {props.task.details}
         </p>
       </div>
     </>

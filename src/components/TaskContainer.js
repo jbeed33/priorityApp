@@ -29,8 +29,8 @@ export default function TaskContainer(props) {
                 console.log(task);
                 return (
                   <TaskCard
-                    title={task.title}
-                    details={task.details}
+                    task={task}
+                    setTaskToDisplay={props.setTaskToDisplay}
                     isTaskDisplayOpen={props.isTaskDisplayOpen}
                   ></TaskCard>
                 );

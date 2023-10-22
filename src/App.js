@@ -9,7 +9,10 @@ import { useState } from "react";
 
 function App() {
   const [openTaskDisplay, isOpenTaskDisplay] = useState(false);
-  const [editTaskModal, setEditTaskModal] = useState(true);
+  const [editTaskModal, setEditTaskModal] = useState(false);
+  const [taskToDisplay, setTaskToDisplay] = useState(null);
+
+  console.log(taskToDisplay);
 
   let data = [
     {
@@ -54,7 +57,10 @@ function App() {
   return (
     <>
       {openTaskDisplay ? (
-        <TaskDisplay isTaskDisplayOpen={isOpenTaskDisplay}></TaskDisplay>
+        <TaskDisplay
+          task={taskToDisplay}
+          isTaskDisplayOpen={isOpenTaskDisplay}
+        ></TaskDisplay>
       ) : null}
 
       {editTaskModal ? (
@@ -66,6 +72,7 @@ function App() {
       <TaskContainer
         toggleTaskEditor={setEditTaskModal}
         isTaskDisplayOpen={isOpenTaskDisplay}
+        setTaskToDisplay={setTaskToDisplay}
         tasks={data[0].high.tasks}
       >
         {" "}
