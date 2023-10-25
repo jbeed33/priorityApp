@@ -54,9 +54,39 @@ function App() {
           },
         ],
       },
-      med: { tasks: [] },
-      lo: "low",
-      no: "none",
+      med: {
+        tasks: [
+          {
+            id: 0, //The id should be a random UUID
+            priority: 2,
+            status: false,
+            title: "Watering the lawn",
+            details: "Description is watering the lawn",
+            lowToMedDate: new Date().getTime(),
+            medToHighDate: new Date().getTime(),
+          },
+          {
+            id: 1,
+            priority: 2,
+            status: false,
+            title: "Task 2",
+            details: "Description is watering the lawn",
+            lowToMedDate: null,
+            medToHighDate: null,
+          },
+          {
+            id: 2,
+            priority: 2,
+            status: false,
+            title: "Task 3",
+            details: "Description is watering the lawn",
+            lowToMedDate: null,
+            medToHighDate: null,
+          },
+        ],
+      },
+      low: { tasks: [] },
+      none: { tasks: [] },
     },
   ];
 
@@ -95,6 +125,15 @@ function App() {
         setTaskToDisplay={setTaskToDisplay}
         tasks={data[0].med.tasks}
         priority={PriorityLevelOptions.MED}
+      >
+        {" "}
+      </TaskContainer>
+      <TaskContainer
+        toggleTaskEditor={setEditTaskModal}
+        isTaskDisplayOpen={isOpenTaskDisplay}
+        setTaskToDisplay={setTaskToDisplay}
+        tasks={data[0].low.tasks}
+        priority={PriorityLevelOptions.LOW}
       >
         {" "}
       </TaskContainer>

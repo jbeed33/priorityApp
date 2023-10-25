@@ -12,6 +12,13 @@ export default function TaskDisplay(props) {
       ? format(new Date(props.task.medToHighDate), "MM/dd/yyyy")
       : " ";
 
+  function changePriortyToName(priorityLevel) {
+    if (priorityLevel === 3) return "High";
+    if (priorityLevel === 2) return "Medium";
+    if (priorityLevel === 1) return "Low";
+    if (priorityLevel === 0) return "None";
+  }
+
   return (
     <>
       <section className="absolute w-full my-auto  p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800 z-10 ">
@@ -28,6 +35,9 @@ export default function TaskDisplay(props) {
             X
           </button>
         </div>
+        <h3 className=" text-sm font-semibold text-gray-500 capitalize dark:text-white">
+          Priority Level: {changePriortyToName(props.task.priority)}
+        </h3>
         <div className="flex ">
           <button class=" mt-4 p-1 font-medium tracking-wide text-white text-xs capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80">
             {props.task.status ? "Complete" : "Incomplete"}
@@ -36,11 +46,11 @@ export default function TaskDisplay(props) {
         <div className="mt-4">
           <h3>
             Lo to Med:{" "}
-            {props.task.lowToMedDate ? formattedLowToMedDate : "None"}
+            {props.task.lowToMedDate ? formattedLowToMedDate : "No Date"}
           </h3>
           <h3>
             Med to Hi:{" "}
-            {props.task.medToHighDate ? formattedMedToHighDate : "None"}
+            {props.task.medToHighDate ? formattedMedToHighDate : "No Date"}
           </h3>
         </div>
 

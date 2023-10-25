@@ -2,11 +2,11 @@ import TaskCard from "./TaskCard";
 import React from "react";
 
 export default function TaskContainer(props) {
-  function changePriortyToName() {
-    if (props.priority === 3) return "High";
-    if (props.priority === 2) return "Medium";
-    if (props.priority === 1) return "Low";
-    if (props.priority === 0) return "None";
+  function changePriortyToName(priorityLevel) {
+    if (priorityLevel === 3) return "High";
+    if (priorityLevel === 2) return "Medium";
+    if (priorityLevel === 1) return "Low";
+    if (priorityLevel === 0) return "None";
   }
 
   return (
@@ -15,7 +15,7 @@ export default function TaskContainer(props) {
         <div className="flex">
           {" "}
           <h2 class="text-xl font-semibold text-gray-800 dark:text-white md:mt-0 w-full text-center mt-10 ">
-            {changePriortyToName() + " Priority Tasks"}
+            {changePriortyToName(props.priority) + " Priority Tasks"}
           </h2>
           <button
             onClick={() => {
