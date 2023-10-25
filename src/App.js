@@ -24,8 +24,8 @@ function App() {
             status: false,
             title: "Watering the lawn",
             details: "Description is watering the lawn",
-            lowToMedDate: null,
-            medToHighDate: null,
+            lowToMedDate: new Date().getTime(),
+            medToHighDate: new Date().getTime(),
           },
           {
             id: 1,
@@ -53,18 +53,22 @@ function App() {
     },
   ];
 
-  //console.log(data);
+  console.log(data[0].high.lowToMedDate);
   return (
     <>
       {openTaskDisplay ? (
         <TaskDisplay
           task={taskToDisplay}
           isTaskDisplayOpen={isOpenTaskDisplay}
+          toggleTaskEditor={setEditTaskModal}
         ></TaskDisplay>
       ) : null}
 
       {editTaskModal ? (
-        <TaskEditor toggleTaskEditor={setEditTaskModal}></TaskEditor>
+        <TaskEditor
+          toggleTaskEditor={setEditTaskModal}
+          task={taskToDisplay}
+        ></TaskEditor>
       ) : null}
 
       <SearchBar></SearchBar>

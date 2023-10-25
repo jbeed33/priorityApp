@@ -1,6 +1,19 @@
 import React from "react";
+import { useState } from "react";
+import { format } from "date-fns";
 
+//Note: When submitting (When saved is pressed) the date might need to be converted back into miliseconds :)
 export default function TaskEditor(props) {
+  let formattedLowToMedDate =
+    props.task.lowToMedDate != null
+      ? format(new Date(props.task.lowToMedDate), "yyyy-MM-dd")
+      : " ";
+
+  let formattedMedToHighDate =
+    props.task.medToHighDate != null
+      ? format(new Date(props.task.medToHighDate), "yyyy-MM-dd")
+      : " ";
+
   return (
     <>
       <section className="absolute w-full my-auto  p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800 z-10 ">
@@ -28,6 +41,7 @@ export default function TaskEditor(props) {
               <input
                 id="title"
                 type="text"
+                value={props.task.title}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
             </div>
@@ -42,6 +56,7 @@ export default function TaskEditor(props) {
               <textarea
                 id="emailAddress"
                 type="email"
+                value={props.task.details}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               ></textarea>
             </div>
@@ -54,6 +69,7 @@ export default function TaskEditor(props) {
             <input
               id="LowToMed"
               type="date"
+              value={formattedLowToMedDate}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
             />
           </div>
@@ -65,6 +81,7 @@ export default function TaskEditor(props) {
             <input
               id="MedToHi"
               type="date"
+              value={formattedMedToHighDate}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
             />
           </div>
