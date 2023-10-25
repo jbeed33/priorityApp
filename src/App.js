@@ -8,6 +8,13 @@ import TaskDisplay from "./components/TaskDisplay";
 import { useState } from "react";
 
 function App() {
+  const PriorityLevelOptions = {
+    HIGH: 3,
+    MED: 2,
+    LOW: 1,
+    NONE: 0,
+  };
+
   const [openTaskDisplay, isOpenTaskDisplay] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const [taskToDisplay, setTaskToDisplay] = useState(null);
@@ -20,7 +27,7 @@ function App() {
         tasks: [
           {
             id: 0, //The id should be a random UUID
-            priority: "high",
+            priority: 3,
             status: false,
             title: "Watering the lawn",
             details: "Description is watering the lawn",
@@ -29,7 +36,7 @@ function App() {
           },
           {
             id: 1,
-            priority: "high",
+            priority: 3,
             status: false,
             title: "Task 2",
             details: "Description is watering the lawn",
@@ -38,7 +45,7 @@ function App() {
           },
           {
             id: 2,
-            priority: "high",
+            priority: 3,
             status: false,
             title: "Task 3",
             details: "Description is watering the lawn",
@@ -78,13 +85,16 @@ function App() {
         isTaskDisplayOpen={isOpenTaskDisplay}
         setTaskToDisplay={setTaskToDisplay}
         tasks={data[0].high.tasks}
+        priority={PriorityLevelOptions.HIGH}
       >
         {" "}
       </TaskContainer>
       <TaskContainer
         toggleTaskEditor={setEditTaskModal}
         isTaskDisplayOpen={isOpenTaskDisplay}
+        setTaskToDisplay={setTaskToDisplay}
         tasks={data[0].med.tasks}
+        priority={PriorityLevelOptions.MED}
       >
         {" "}
       </TaskContainer>
