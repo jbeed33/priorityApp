@@ -6,15 +6,9 @@ import TaskContainer from "./components/TaskContainer";
 import TaskEditor from "./components/TaskEditor";
 import TaskDisplay from "./components/TaskDisplay";
 import { useState } from "react";
+import { PriorityLevelOptions } from "./utils/TaskUtils";
 
 function App() {
-  const PriorityLevelOptions = {
-    HIGH: 3,
-    MED: 2,
-    LOW: 1,
-    NONE: 0,
-  };
-
   const [openTaskDisplay, isOpenTaskDisplay] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const [taskToDisplay, setTaskToDisplay] = useState(null);
@@ -29,6 +23,7 @@ function App() {
             id: 0, //The id should be a random UUID
             priority: 3,
             status: false,
+            statusUpdateDate: new Date().getTime(),
             title: "Watering the lawn",
             details: "Description is watering the lawn",
             lowToMedDate: new Date().getTime(),
@@ -87,6 +82,19 @@ function App() {
       },
       low: { tasks: [] },
       none: { tasks: [] },
+      complete: {
+        tasks: [
+          {
+            id: 0, //The id should be a random UUID
+            priority: 2,
+            status: true,
+            title: "Watering the lawn",
+            details: "Description is watering the lawn",
+            lowToMedDate: new Date().getTime(),
+            medToHighDate: new Date().getTime(),
+          },
+        ],
+      },
     },
   ];
 

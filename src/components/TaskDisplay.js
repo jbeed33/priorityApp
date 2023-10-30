@@ -1,23 +1,24 @@
 import React from "react";
-import { format } from "date-fns";
+import {
+  changeMilisecondsToDayMonthAndYear,
+  changePriortyToName,
+} from "../utils/TaskUtils";
 
 export default function TaskDisplay(props) {
-  let formattedLowToMedDate =
-    props.task.lowToMedDate != null
-      ? format(new Date(props.task.lowToMedDate), "MM/dd/yyyy")
-      : " ";
+  let formattedLowToMedDate = changeMilisecondsToDayMonthAndYear(
+    props.task.lowToMedDate,
+    "MM/dd/yyyy"
+  );
 
-  let formattedMedToHighDate =
-    props.task.medToHighDate != null
-      ? format(new Date(props.task.medToHighDate), "MM/dd/yyyy")
-      : " ";
+  let formattedMedToHighDate = changeMilisecondsToDayMonthAndYear(
+    props.task.medToHighDate,
+    "MM/dd/yyyy"
+  );
 
-  function changePriortyToName(priorityLevel) {
-    if (priorityLevel === 3) return "High";
-    if (priorityLevel === 2) return "Medium";
-    if (priorityLevel === 1) return "Low";
-    if (priorityLevel === 0) return "None";
-  }
+  let formattedCompletionDate = changeMilisecondsToDayMonthAndYear(
+    props.task.medToHighDate,
+    "MM/dd/yyyy"
+  );
 
   return (
     <>
@@ -41,6 +42,7 @@ export default function TaskDisplay(props) {
         <div className="flex ">
           <button class=" mt-4 p-1 font-medium tracking-wide text-white text-xs capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80">
             {props.task.status ? "Complete" : "Incomplete"}
+            {props.task.status ? ` ${formattedCompletionDate}` : " "}
           </button>
         </div>
         <div className="mt-4">
