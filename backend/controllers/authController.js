@@ -1,5 +1,27 @@
-const post_signup_user = (req, res, next) => {
-  res.send({ msg: "Sign up called" });
+const User = require("../models/userModal");
+const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt");
+
+const post_signup_user = async (req, res, next) => {
+  //check to see if whole uesr already exsists
+  // if so send a responds that the user already exsists try again.
+
+  let userId = uuidv4();
+
+  try {
+    const { name, email, username, password } = req.body;
+
+    // hash the password
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(password, salt);
+
+    const newUser = new User({ userId, name, email, username, password: hash });
+    await newUser.save();
+    //somewhere here we also send back a JWT
+    res.send({ msg: "Account created." });
+  } catch (e) {
+    console.error(`something went wrong in user sign up ${e}`);
+  }
 };
 
 const post_login_user = (req, res, next) => {

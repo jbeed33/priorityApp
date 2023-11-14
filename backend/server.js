@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const { MongoClient } = require("mongodb");
 const authRouter = require("./routes/authRoutes");
 
 const app = express();
@@ -15,12 +14,10 @@ app.use("/user", authRouter);
 
 const uri = process.env.MONGO_URI;
 
-const client = new MongoClient(uri);
-
 async function connectToDB() {
   try {
-    await client.connect();
-    console.log("connected to DB...");
+    await mongoose.connect(uri);
+    //console.log("connected to DB...");
   } catch (e) {
     console.error(e);
   }
@@ -32,5 +29,6 @@ app.get("/", (req, res) => {
 
 //Intializing server only if we are able to connect to the database
 connectToDB()
+  .then(console.log("connected to DB..."))
   .then(app.listen(port, () => console.log("listening on port 3000")))
   .catch((err) => console.log(err));
