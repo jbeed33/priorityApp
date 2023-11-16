@@ -1,6 +1,12 @@
 const User = require("../models/userModal");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+const createToken = async (id, name) => {
+  return jwt.sign({ id, name }, process.env.TOKEN_KEY);
+};
 
 const post_signup_user = async (req, res, next) => {
   //check to see if whole uesr already exsists
@@ -17,7 +23,8 @@ const post_signup_user = async (req, res, next) => {
 
     const newUser = new User({ userId, name, email, username, password: hash });
     await newUser.save();
-    //somewhere here we also send back a JWT
+    const createdToken = await createToken(newUser._id, name);
+    res.cookie("auth", await createdToken, { httpOnly: true });
     res.send({ msg: "Account created." });
   } catch (e) {
     console.error(`something went wrong in user sign up ${e}`);
