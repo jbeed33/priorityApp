@@ -9,16 +9,21 @@ const createToken = async (id, name) => {
 };
 
 const authorize = async (req, res, next) => {
-  const token = req.headers["authorization"];
+  const token = req.cookies["authorization"];
+  console.log(token);
 
   if (!token) {
-    return res.status(401).json({ message: "Authorization token is missing" });
+    // if they inputted email/username and password
+    //check to see if the email/username and password is correct
+    // create them one
+    return res.status(401).json({ msg: "Authorization token is missing" });
   }
 
-  await jwt.verify(token, secretKey, (err, decoded) => {
+  await jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: "Invalid token" });
     }
+    console.log("Decode: ", decoded);
     req.user = decoded;
     next();
   });
@@ -40,8 +45,8 @@ const post_signup_user = async (req, res, next) => {
     const newUser = new User({ userId, name, email, username, password: hash });
     await newUser.save();
     const createdToken = await createToken(newUser._id, name);
-    res.cookie("auth", createdToken, { httpOnly: true });
-    res.send({ msg: "Account created." });
+    res.cookie("authorization", createdToken);
+    res.status(201).send({ msg: "Account created.", token: createdToken });
   } catch (e) {
     // still need to do a better job at error handling.
     console.error(`something went wrong in user sign up ${e}`);
@@ -49,10 +54,7 @@ const post_signup_user = async (req, res, next) => {
 };
 
 const post_login_user = (req, res, next) => {
-  //Do stuff
-  // create token
-  //else error handle
-  res.send({ msg: "Login called" });
+  res.send({ msg: "Login called", canRedirect: true });
 };
 
 const post_sign_out_user = (req, res, next) => {

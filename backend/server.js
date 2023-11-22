@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 3010;
@@ -12,8 +13,10 @@ app.use(cors());
 // Need this to parse incoming strings.
 app.use(express.json());
 
+app.use(cookieParser());
+
 //Middleware
-app.use("/user", authRouter);
+app.use("/api/user", authRouter);
 
 const uri = process.env.MONGO_URI;
 
