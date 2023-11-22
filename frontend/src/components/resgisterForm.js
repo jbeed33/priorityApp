@@ -63,7 +63,7 @@ export default function RegisterForm() {
 
     e.preventDefault();
     try {
-      let result = await fetch("http://localhost:3010/user/signup", options);
+      let result = await fetch("/api/user/signup", options);
       let data = await result.json();
 
       if (!result.ok) {
@@ -71,9 +71,9 @@ export default function RegisterForm() {
       }
 
       setMessageInfo({ message: data.msg, isError: false });
-      const cookie = new Cookies("authorization", data.token);
-      cookie.set("authorization", data.token);
-      console.log("Token", data.token);
+      // const cookie = new Cookies("authorization", data.token);
+      // cookie.set("authorization", data.token);
+      // console.log("Token", data.token);
       reroute();
     } catch (e) {
       setMessageInfo({ message: "Error occured: " + e, isError: true });
@@ -176,7 +176,7 @@ export default function RegisterForm() {
               className="hover:underline"
               onClick={() => console.log("transiton to login form")}
             >
-              Register User
+              Login User
             </Link>
           </div>
         </form>
