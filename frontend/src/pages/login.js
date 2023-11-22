@@ -6,7 +6,11 @@ export default function Login() {
   const [displayLogin, setDisplayLogin] = useState(true);
   return (
     <>
-      {displayLogin ? <LoginForm></LoginForm> : <RegisterForm></RegisterForm>}
+      {displayLogin ? (
+        <LoginForm displayLogin={setDisplayLogin}></LoginForm>
+      ) : (
+        <RegisterForm displayLogin={setDisplayLogin}></RegisterForm>
+      )}
     </>
   );
 }

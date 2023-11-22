@@ -2,7 +2,7 @@ import React from "react";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   let navigate = useNavigate();
   const [loginInfo, setRegisterInfo] = useState({
     email: "",
@@ -136,7 +136,7 @@ export default function LoginForm() {
 
             <Link
               className="hover:underline"
-              onClick={() => console.log("transiton to login form")}
+              onClick={() => props.displayLogin(false)}
             >
               Register User
             </Link>

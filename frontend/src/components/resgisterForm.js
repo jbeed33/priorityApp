@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "universal-cookie";
 
-export default function RegisterForm() {
+export default function RegisterForm(props) {
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
     username: "",
@@ -174,7 +174,7 @@ export default function RegisterForm() {
 
             <Link
               className="hover:underline"
-              onClick={() => console.log("transiton to login form")}
+              onClick={() => props.displayLogin(true)}
             >
               Login User
             </Link>
