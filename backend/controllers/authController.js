@@ -8,6 +8,10 @@ const createToken = async (id, name) => {
   return await jwt.sign({ id, name }, process.env.TOKEN_KEY);
 };
 
+const createCookie = (createdToken) => {
+  return { name: "authorization", token: createdToken, options: {} };
+};
+
 const authorize = async (req, res, next) => {
   const token = req.cookies["authorization"];
   console.log(token);
@@ -39,13 +43,14 @@ const post_signup_user = async (req, res, next) => {
     const { name, email, username, password } = req.body;
 
     // hash the password
-    const salt = await bcrypt.genSalt();
+    const salt = process.env.HASH_KEY;
     const hash = await bcrypt.hash(password, salt);
 
     const newUser = new User({ userId, name, email, username, password: hash });
     await newUser.save();
     const createdToken = await createToken(newUser._id, name);
-    res.cookie("authorization", createdToken);
+    const cookie = createCookie(createdToken);
+    res.cookie(cookie.name, cookie.token, cookie.options);
     res.status(201).send({ msg: "Account created.", token: createdToken });
   } catch (e) {
     // still need to do a better job at error handling.
@@ -53,8 +58,45 @@ const post_signup_user = async (req, res, next) => {
   }
 };
 
-const post_login_user = (req, res, next) => {
-  res.send({ msg: "Login called", canRedirect: true });
+const post_login_user = async (req, res, next) => {
+  const token = req.cookies["authorization"];
+  if (!token) {
+    //check to see if user exsists, if so create token and redirect them to dashboard.
+    const { email, password } = req.body;
+    console.log("email or username: ", email);
+    console.log("password: ", password);
+
+    const salt = process.env.HASH_KEY;
+    const hash = await bcrypt.hash(password, salt);
+    console.log("hash: ", hash);
+    try {
+      let foundUser = await User.findOne({ email: email })
+        .where("password")
+        .equals(hash)
+        .select("userId name");
+
+      console.log(foundUser);
+
+      if (foundUser != null) {
+        const token = await createToken(foundUser.userId, foundUser.name);
+        const cookie = createCookie(token);
+        res.cookie(cookie.name, cookie.token, cookie.options);
+        res.status(200).send({ msg: "Logging In", canRedirect: true });
+      } else {
+        res.send({
+          msg: "Username or Password is incorrect.",
+          canRedirect: false,
+        });
+      }
+    } catch (e) {
+      res
+        .status(400)
+        .send({ msg: "Incorrect Username or Password", canRedirect: false });
+    }
+  } else {
+    //automatically login already have a valid cookie
+    res.status(200).send({ msg: "Logging In", canRedirect: true });
+  }
 };
 
 const post_sign_out_user = (req, res, next) => {
