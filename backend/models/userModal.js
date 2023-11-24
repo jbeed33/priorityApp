@@ -36,6 +36,7 @@ const schema = new mongoose.Schema({
   },
 });
 
+//set schema to communicate to a specific collection within a database.
 schema.set("collection", "users");
 
 const User = mongoose.model("User", schema);

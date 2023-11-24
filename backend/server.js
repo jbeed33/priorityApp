@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
+const taskRouter = require("./routes/taskRouter");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -17,6 +18,8 @@ app.use(cookieParser());
 
 //Middleware
 app.use("/api/user", authRouter);
+
+app.use("/api/task", taskRouter);
 
 const uri = process.env.MONGO_URI;
 
