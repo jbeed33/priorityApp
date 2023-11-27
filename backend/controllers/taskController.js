@@ -3,11 +3,11 @@ const { v4: uuidv4 } = require("uuid");
 
 const post_create_task = async (req, res) => {
   const taskId = uuidv4();
-  const udpatedAt = new Date();
+  const updatedAt = new Date();
   const createdAt = new Date();
+  const userId = req.user.id;
 
   const {
-    userId,
     priority,
     status,
     title,
@@ -54,11 +54,26 @@ const patch_update_task = async (req, res) => {
 
 const get_tasks_by_user = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { id } = req.user;
 
-    const allTasks = await Task.find({ userId });
+    let returnTasks = {
+      0: [],
+      1: [],
+      2: [],
+    };
 
-    res.status(200).send(allTasks);
+    console.log(id);
+
+    const allTasks = await Task.find({ userId: id });
+
+    //Organize them by status
+    allTasks.forEach((task) => {
+      returnTasks[task.status].push(task);
+    });
+
+    console.log(returnTasks);
+
+    res.status(200).send(returnTasks);
   } catch (e) {
     res.status(400).send("Get all task error: " + e);
   }

@@ -5,11 +5,19 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const createToken = async (id, name) => {
-  return await jwt.sign({ id, name }, process.env.TOKEN_KEY);
+  //token expires in 10 minutes
+  return await jwt.sign({ id, name }, process.env.TOKEN_KEY, {
+    expiresIn: "10m",
+  });
 };
 
 const createCookie = (createdToken) => {
-  return { name: "authorization", token: createdToken, options: {} };
+  //cookie expires in 3 minutes
+  return {
+    name: "authorization",
+    token: createdToken,
+    options: { maxAge: 600000, httpOnly: true },
+  };
 };
 
 const authorize = async (req, res, next) => {
@@ -27,6 +35,7 @@ const authorize = async (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: "Invalid token" });
     }
+
     console.log("Decode: ", decoded);
     req.user = decoded;
     next();
@@ -48,7 +57,7 @@ const post_signup_user = async (req, res, next) => {
 
     const newUser = new User({ userId, name, email, username, password: hash });
     await newUser.save();
-    const createdToken = await createToken(newUser._id, name);
+    const createdToken = await createToken(newUser.userId, name);
     const cookie = createCookie(createdToken);
     res.cookie(cookie.name, cookie.token, cookie.options);
     res.status(201).send({ msg: "Account created.", token: createdToken });
