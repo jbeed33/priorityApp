@@ -56,9 +56,7 @@ export default function LoginForm(props) {
       }
 
       setMessageInfo({ message: data.msg, isError: false });
-      // const cookie = new Cookies("authorization", data.token);
-      // cookie.set("authorization", data.token);
-      // console.log("Token", data.token);
+
       if (data.canRedirect) {
         console.log("Login redirect is called");
         navigate("/dashboard");

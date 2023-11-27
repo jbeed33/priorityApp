@@ -3,102 +3,44 @@ import Filter from "../components/Filter";
 import TaskContainer from "../components/TaskContainer";
 import TaskEditor from "../components/TaskEditor";
 import TaskDisplay from "../components/TaskDisplay";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PriorityLevelOptions } from "../utils/TaskUtils";
 
 function Dashboard() {
   const [openTaskDisplay, isOpenTaskDisplay] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const [taskToDisplay, setTaskToDisplay] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   console.log(taskToDisplay);
 
-  let data = [
-    {
-      high: {
-        tasks: [
-          {
-            id: 0, //The id should be a random UUID
-            priority: 3,
-            status: false,
-            statusUpdateDate: new Date().getTime(),
-            title: "Watering the lawn",
-            details: "Description is watering the lawn",
-            lowToMedDate: new Date().getTime(),
-            medToHighDate: new Date().getTime(),
-          },
-          {
-            id: 1,
-            priority: 3,
-            status: false,
-            title: "Task 2",
-            details: "Description is watering the lawn",
-            lowToMedDate: null,
-            medToHighDate: null,
-          },
-          {
-            id: 2,
-            priority: 3,
-            status: false,
-            title: "Task 3",
-            details: "Description is watering the lawn",
-            lowToMedDate: null,
-            medToHighDate: null,
-          },
-        ],
-      },
-      med: {
-        tasks: [
-          {
-            id: 0, //The id should be a random UUID
-            priority: 2,
-            status: false,
-            title: "Watering the lawn",
-            details: "Description is watering the lawn",
-            lowToMedDate: new Date().getTime(),
-            medToHighDate: new Date().getTime(),
-          },
-          {
-            id: 1,
-            priority: 2,
-            status: false,
-            title: "Task 2",
-            details: "Description is watering the lawn",
-            lowToMedDate: null,
-            medToHighDate: null,
-          },
-          {
-            id: 2,
-            priority: 2,
-            status: false,
-            title: "Task 3",
-            details: "Description is watering the lawn",
-            lowToMedDate: null,
-            medToHighDate: null,
-          },
-        ],
-      },
-      low: { tasks: [] },
-      none: { tasks: [] },
-      complete: {
-        tasks: [
-          {
-            id: 0, //The id should be a random UUID
-            priority: 2,
-            status: true,
-            title: "Watering the lawn",
-            details: "Description is watering the lawn",
-            lowToMedDate: new Date().getTime(),
-            medToHighDate: new Date().getTime(),
-          },
-        ],
-      },
-    },
-  ];
+  async function fetchAllTasks() {
+    try {
+      const res = await fetch("/api/task/tasks");
+      const data = await res.json();
+      setUserData(data);
+      console.log("data to display: ", data[0]);
+    } catch (e) {
+      console.log("Error Use Effect", e);
+    }
+  }
+  useEffect(() => {
+    try {
+      fetchAllTasks();
+    } catch (e) {
+      console.error("Error occured in Dashboard use effect: ", e);
+    }
+  }, []);
 
-  console.log(data[0].high.lowToMedDate);
   return (
     <>
+      {/* <h1>
+        {userData.length == 0
+          ? "hello world"
+          : userData.map((user) => {
+              return user.title + "\n";
+            })}
+      </h1> */}
       {openTaskDisplay ? (
         <TaskDisplay
           task={taskToDisplay}
@@ -120,26 +62,22 @@ function Dashboard() {
         toggleTaskEditor={setEditTaskModal}
         isTaskDisplayOpen={isOpenTaskDisplay}
         setTaskToDisplay={setTaskToDisplay}
-        tasks={data[0].high.tasks}
-        priority={PriorityLevelOptions.HIGH}
-      >
-        {" "}
-      </TaskContainer>
+        tasks={userData === null ? null : userData[0]}
+        priority={0}
+      ></TaskContainer>
       <TaskContainer
         toggleTaskEditor={setEditTaskModal}
         isTaskDisplayOpen={isOpenTaskDisplay}
         setTaskToDisplay={setTaskToDisplay}
-        tasks={data[0].med.tasks}
-        priority={PriorityLevelOptions.MED}
-      >
-        {" "}
-      </TaskContainer>
+        tasks={userData === null ? null : userData[1]}
+        priority={2}
+      ></TaskContainer>
       <TaskContainer
         toggleTaskEditor={setEditTaskModal}
         isTaskDisplayOpen={isOpenTaskDisplay}
         setTaskToDisplay={setTaskToDisplay}
-        tasks={data[0].low.tasks}
-        priority={PriorityLevelOptions.LOW}
+        tasks={userData === null ? null : userData[2]}
+        priority={0}
       >
         {" "}
       </TaskContainer>

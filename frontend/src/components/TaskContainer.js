@@ -9,6 +9,8 @@ export default function TaskContainer(props) {
     if (priorityLevel === 0) return "None";
   }
 
+  console.log(props.tasks);
+
   return (
     <>
       <div className="flex flex-col">
