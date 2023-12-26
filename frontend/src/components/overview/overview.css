@@ -1,0 +1,59 @@
+/* Styling */
+
+.overview-cols {
+  background-color: #1f1e24;
+  border-radius: 2%;
+}
+
+/* Layout */
+
+#overview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 95%;
+  height: 70vh;
+  margin: 0 auto;
+}
+
+.overview-cols {
+  width: 100%;
+}
+
+.cols-bg {
+  height: 48%;
+}
+
+.cols-sm {
+  height: 23%;
+}
+
+#overview-filter {
+  width: 90%;
+  border: 1px solid red;
+  margin: 1em auto;
+  height: 30%;
+}
+
+@media screen and (min-width: 800px) {
+  #overview-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .overview-cols {
+    height: 100%;
+  }
+
+  .cols-bg {
+    width: 48%;
+  }
+
+  .cols-sm {
+    width: 23%;
+  }
+
+  #overview-filter {
+  }
+}
+/* Typography */

@@ -27,8 +27,8 @@ export default function TaskContainer(props) {
                 status: false,
                 title: "",
                 details: "",
-                lowToMedDate: new Date().getTime(),
-                medToHighDate: new Date().getTime(),
+                lowToMedDate: new Date(),
+                medToHighDate: new Date(),
               });
               props.toggleTaskEditor(true);
             }}
@@ -39,7 +39,7 @@ export default function TaskContainer(props) {
         </div>
 
         <div className="flex flex-col h-64  overflow-scroll w-11/12  m-auto ">
-          {props.tasks.length === 0 || props.tasks === null ? (
+          {props.tasks?.length === 0 || props.tasks === null ? (
             <h1>No Tasks Found</h1>
           ) : (
             <div>

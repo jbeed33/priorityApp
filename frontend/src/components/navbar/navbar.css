@@ -1,0 +1,102 @@
+* {
+  color: white;
+}
+
+/* styling */
+
+button,
+#profile {
+  background-color: #1f1e24;
+  border-radius: 50%;
+  border: none;
+  width: 42px;
+  height: 42px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover,
+#profile:hover {
+  border: 2px solid white;
+}
+
+#profile {
+  width: 52px;
+  height: 52px;
+}
+
+#profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Layout */
+#main-container {
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 4em;
+  margin-bottom: 2em;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: 0.25em;
+}
+
+nav {
+  display: flex;
+  margin: 0 auto;
+  width: 50%;
+}
+
+nav #profile {
+  position: absolute;
+  top: 2%;
+  right: 10%;
+}
+
+@media screen and (min-width: 800px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  nav {
+    min-width: 200px;
+    width: 15%;
+    max-width: 500px;
+    align-items: center;
+    margin-right: 0;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  nav #profile {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+}
+
+/* Typography */
+
+#title {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+#sub-title {
+  font-size: 24px;
+  font-weight: 400;
+}
