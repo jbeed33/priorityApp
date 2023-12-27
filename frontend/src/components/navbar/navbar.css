@@ -4,7 +4,7 @@
 
 /* styling */
 
-button,
+nav button,
 #profile {
   background-color: #1f1e24;
   border-radius: 50%;
@@ -15,7 +15,7 @@ button,
   cursor: pointer;
 }
 
-button:hover,
+nav button:hover,
 #profile:hover {
   border: 2px solid white;
 }

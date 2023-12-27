@@ -1,3 +1,4 @@
+import OverviewFilter from "../overviewFilter/OverviewFIlter";
 import "./overview.css";
 
 export default function Overview() {
@@ -5,7 +6,7 @@ export default function Overview() {
     <>
       <div id="overview-container">
         <div class="overview-cols cols-bg">
-          <div id="overview-filter"></div>
+          <OverviewFilter></OverviewFilter>
           <div id="overiew-display">
             <div class="list list-col-width"></div>
             <div class="list list-col-width"></div>

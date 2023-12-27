@@ -28,13 +28,6 @@
   height: 23%;
 }
 
-#overview-filter {
-  width: 90%;
-  border: 1px solid red;
-  margin: 1em auto;
-  height: 30%;
-}
-
 @media screen and (min-width: 800px) {
   #overview-container {
     flex-direction: row;
@@ -51,9 +44,6 @@
 
   .cols-sm {
     width: 23%;
-  }
-
-  #overview-filter {
   }
 }
 /* Typography */

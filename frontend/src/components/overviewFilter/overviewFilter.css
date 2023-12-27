@@ -1,0 +1,91 @@
+/* styling */
+#overview-filter {
+  border-radius: 10px/10px;
+}
+
+#overview-filter:hover {
+  /* border: 1px white solid; */
+}
+
+#overview-filter-scrollable-container {
+  list-style: none;
+}
+
+.overview-filter-button {
+  padding: 0.2em 1.3em;
+  border: 3px solid #0731c8;
+  background-color: transparent;
+  color: #0731c8;
+  border-radius: 10px / 10px;
+  cursor: pointer;
+}
+
+.overview-filter-button:hover {
+  border: 3px solid #2451f5;
+  color: #2451f5;
+}
+
+/*Layout*/
+
+#overview-filter {
+  width: 95%;
+  margin: 1em auto;
+  overflow: hidden;
+  height: 30%;
+}
+
+#overview-filter:hover {
+  overflow: visible;
+  height: auto;
+  padding-bottom: 1em;
+}
+
+#overview-filter-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 1em auto;
+}
+
+#overview-filter-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+  padding: 0.3em;
+}
+
+#overview-filter-scrollable-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  #overview-filter {
+    height: 15%;
+  }
+
+  #overview-filter-scrollable-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/*Typography*/
+
+#overview-filter-header h1 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.overview-filter-button {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
