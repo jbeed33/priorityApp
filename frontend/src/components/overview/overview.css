@@ -5,6 +5,10 @@
   border-radius: 2%;
 }
 
+.half-width {
+  border: 2px solid red;
+}
+
 /* Layout */
 
 #overview-container {
@@ -12,30 +16,87 @@
   flex-direction: column;
   justify-content: space-between;
   width: 95%;
-  height: 70vh;
   margin: 0 auto;
+  overflow: hidden;
+  gap: 3em;
+}
+
+#overiew-display {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  max-height: 29.375em;
+  margin: 0 auto;
+  overflow-y: scroll;
 }
 
 .overview-cols {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   width: 100%;
+  height: 100%;
+}
+
+.overview-cols h1 {
+  text-align: center;
+  margin-top: 0.8em;
 }
 
 .cols-bg {
-  height: 48%;
+  height: 100%;
 }
 
 .cols-sm {
-  height: 23%;
+  height: 100%;
 }
 
-@media screen and (min-width: 800px) {
+#filter-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 2em;
+  width: 80px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 400px) {
   #overview-container {
+    height: fit-content;
+    gap: 4em;
+  }
+  #overiew-display {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1em;
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
   }
 
   .overview-cols {
     height: 100%;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 950px) {
+  #overview-container {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  #overiew-display {
+    flex-direction: row;
+    gap: 10px;
+    width: 95%;
+    height: 80%;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .overview-cols {
+    height: auto;
   }
 
   .cols-bg {
@@ -46,4 +107,14 @@
     width: 23%;
   }
 }
+
 /* Typography */
+.overview-cols h1 {
+  font-weight: 500;
+  font-size: 22px;
+}
+
+#filter-btn h2 {
+  font-size: 22px;
+  font-weight: 400;
+}

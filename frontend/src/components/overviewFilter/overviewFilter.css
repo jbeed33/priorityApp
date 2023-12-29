@@ -9,6 +9,7 @@
 
 #overview-filter-scrollable-container {
   list-style: none;
+  background-color: black;
 }
 
 .overview-filter-button {
@@ -31,13 +32,14 @@
   width: 95%;
   margin: 1em auto;
   overflow: hidden;
-  height: 30%;
+  height: 100%;
 }
 
 #overview-filter:hover {
   overflow: visible;
   height: auto;
   padding-bottom: 1em;
+  z-index: 20;
 }
 
 #overview-filter-container {

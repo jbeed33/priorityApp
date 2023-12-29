@@ -1,0 +1,66 @@
+/*styling */
+#card-container {
+  background-color: #000000;
+  border-radius: 10px/10px;
+  margin-top: 0.5em;
+}
+
+#card-title {
+  color: white;
+}
+
+#card-container p,
+.card-status-title {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.card-status-detail {
+  color: #0731c8;
+}
+
+button {
+  background-color: transparent;
+}
+
+.custom-icon-color {
+  color: blue;
+}
+/* Layout*/
+
+#card-container {
+  width: 100%;
+  padding: 0.5em 1em;
+}
+
+#card-header,
+#card-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+p {
+  margin-bottom: 0.8em;
+}
+
+#card-options {
+  display: flex;
+  border: 1px red solid;
+  width: 35%;
+  justify-content: space-between;
+}
+
+#card-options button {
+  font-size: large;
+}
+
+/* Typography */
+
+#card-title {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+#card-details {
+  font-size: 12px;
+}
