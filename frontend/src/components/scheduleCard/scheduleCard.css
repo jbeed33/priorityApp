@@ -1,0 +1,30 @@
+/* Styling */
+
+#card-header {
+  color: white;
+}
+
+#card-list li {
+  list-style: none;
+}
+
+#card-list h3 {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+/*Layout */
+
+#card-list li {
+  margin-bottom: 0.5em;
+}
+
+/*Typography */
+
+#card-header h1 {
+  font-size: 1.2em;
+}
+
+#card-list h3 {
+  font-size: 1em;
+  font-weight: 400;
+}
