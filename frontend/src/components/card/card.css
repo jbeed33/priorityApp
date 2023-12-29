@@ -7,6 +7,23 @@
 
 #card-title {
   color: white;
+  width: 30px;
+  height: 30px;
+}
+
+.card-icon {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.card-icon:hover {
+  color: white;
+}
+
+#card-options button {
+  width: 20%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 #card-container p,
@@ -18,9 +35,9 @@
   color: #0731c8;
 }
 
-button {
+/* button {
   background-color: transparent;
-}
+} */
 
 .custom-icon-color {
   color: blue;
@@ -45,13 +62,8 @@ p {
 
 #card-options {
   display: flex;
-  border: 1px red solid;
-  width: 35%;
+  width: 30%;
   justify-content: space-between;
-}
-
-#card-options button {
-  font-size: large;
 }
 
 /* Typography */

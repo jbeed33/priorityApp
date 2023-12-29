@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faCheck, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./card.css";
 
 export default function Card() {
@@ -9,12 +9,14 @@ export default function Card() {
         <div id="card-header">
           <div id="card-title">Dinner</div>
           <div id="card-options">
-            <FontAwesomeIcon icon={faEdit} style={{ color: "red" }} />
             <button>
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faEdit} class="card-icon" />
             </button>
             <button>
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faCheck} class="card-icon" />
+            </button>
+            <button>
+              <FontAwesomeIcon icon={faEllipsis} class="card-icon" />
             </button>
           </div>
         </div>
