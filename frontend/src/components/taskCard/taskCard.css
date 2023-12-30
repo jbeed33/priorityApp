@@ -1,0 +1,44 @@
+/* Styling */
+
+#card p {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+#card button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#card .card-icon {
+  width: 23px;
+  height: 23px;
+  color: rgba(18, 176, 18, 0.274);
+}
+
+#card:hover p {
+  color: rgba(255, 255, 255, 0.772);
+}
+
+#card .card-icon:hover {
+  color: rgb(18, 176, 18);
+}
+
+/*Layout */
+
+#card {
+  display: flex;
+  align-items: center;
+  margin-left: 1em;
+}
+
+#card p {
+  margin-left: 1em;
+}
+
+/*Typography */
+
+#card p {
+  font-size: 1em;
+  font-weight: 400;
+}

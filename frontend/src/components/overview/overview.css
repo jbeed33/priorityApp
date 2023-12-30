@@ -9,11 +9,30 @@
   border: 2px solid red;
 }
 
+.overview-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 0.2em 1.3em;
+  border: 3px solid #0731c8;
+  background-color: transparent;
+  color: #0731c8;
+  border-radius: 10px / 10px;
+  cursor: pointer;
+  margin: 0.5em auto;
+}
+
+.overview-button:hover {
+  border: 3px solid #2451f5;
+  color: #2451f5;
+}
+
 /* Layout */
 
 #overview-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: space-between;
   width: 95%;
   margin: 0 auto;
@@ -21,13 +40,18 @@
   gap: 3em;
 }
 
-#overiew-display {
+#overiew-display,
+#overview-task-list-container {
   display: flex;
   flex-direction: column;
   width: 95%;
-  max-height: 29.375em;
+  max-height: 30em;
   margin: 0 auto;
   overflow-y: scroll;
+}
+
+#overview-task-list-container {
+  margin-top: 1.5em;
 }
 
 .overview-cols {
@@ -36,11 +60,12 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  padding-bottom: 15px;
 }
 
 .overview-cols h1 {
   text-align: center;
-  margin-top: 0.8em;
+  margin-top: 1em;
 }
 
 .cols-bg {
@@ -52,22 +77,30 @@
 }
 
 #filter-btn {
+  position: relative;
+  top: 20px;
+  left: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5em 2em;
   width: 80px;
   cursor: pointer;
+  margin-bottom: -2em;
 }
 
-#overview-task-list-container {
-  margin: 1em;
+#filter-btn h2 {
+  display: none;
+}
+
+.overview-button h3 {
+  margin-left: 1em;
 }
 
 @media screen and (min-width: 400px) {
   #overview-container {
     height: fit-content;
     gap: 4em;
+    margin-bottom: 2rem;
   }
   #overiew-display {
     flex-direction: row;
@@ -81,6 +114,10 @@
   .overview-cols {
     height: 100%;
     width: 100%;
+  }
+
+  #filter-btn h2 {
+    display: inline-block;
   }
 }
 @media screen and (min-width: 950px) {

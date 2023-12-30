@@ -10,9 +10,6 @@ export default function Card() {
           <div id="card-title">Dinner</div>
           <div id="card-options">
             <button>
-              <FontAwesomeIcon icon={faEdit} class="card-icon" />
-            </button>
-            <button>
               <FontAwesomeIcon icon={faCheck} class="card-icon" />
             </button>
             <button>
@@ -23,11 +20,11 @@ export default function Card() {
         <p>This has some text. This has some text here.</p>
         <div id="card-details">
           <div className="card-status">
-            <h3 className="card-status-title">Status</h3>
-            <h3 className="card-status-detail">Active</h3>
+            <h3 className="card-status-title">Priority Lvl</h3>
+            <h3 className="card-status-detail">High</h3>
           </div>
           <div className="card-status">
-            <h3 className="card-status-title">End Date</h3>
+            <h3 className="card-status-title">Due Date</h3>
             <h3 className="card-status-detail">12/27/23</h3>
           </div>
         </div>
