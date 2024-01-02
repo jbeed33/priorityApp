@@ -5,8 +5,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faAdd } from "@fortawesome/free-solid-svg-icons";
 import ScheduleCard from "../scheduleCard/ScheduleCard";
 import TaskCard from "../taskCard/TaskCard";
+import { useEffect, useState } from "react";
 
 export default function Overview() {
+  let [taskData, setTaskData] = useState([]);
+
+  async function fetchData() {
+    try {
+      let res = await fetch("/api/task/tasks");
+      if (res.ok) {
+        let data = await res.json();
+        setTaskData(() => data);
+        console.log("dashboard data", data);
+      }
+      if (!res.ok) console.log("made it here");
+    } catch (e) {
+      console.log("Something went wrong when fetching tasks ", e);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <div id="overview-container">
@@ -22,30 +42,38 @@ export default function Overview() {
             <h3>Add Task</h3>
           </button>
 
-          <div id="overiew-display">
-            <div>
-              <Card></Card>
-              <Card></Card>
-              <Card></Card>
-              <Card></Card>
-            </div>
+          {taskData.length == 0 ? (
+            <h1>Please add a task</h1>
+          ) : (
+            <div id="overiew-display">
+              <div>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+              </div>
 
-            <div>
-              <Card></Card>
-              <Card></Card>
-              <Card></Card>
-              <Card></Card>
+              <div>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div class="overview-cols cols-sm">
           <h1>Due this week</h1>
-          <div id="overview-task-list-container">
-            <ScheduleCard></ScheduleCard>
-            <ScheduleCard></ScheduleCard>
-            <ScheduleCard></ScheduleCard>
-            <ScheduleCard></ScheduleCard>
-          </div>
+          {taskData.length == 0 ? (
+            <h1>No tasks this week</h1>
+          ) : (
+            <div id="overview-task-list-container">
+              <ScheduleCard></ScheduleCard>
+              <ScheduleCard></ScheduleCard>
+              <ScheduleCard></ScheduleCard>
+              <ScheduleCard></ScheduleCard>
+            </div>
+          )}
         </div>
         <div class="overview-cols cols-sm">
           <h1>Goals</h1>
