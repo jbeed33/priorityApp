@@ -53,23 +53,34 @@ const patch_update_task = async (req, res) => {
 };
 
 const get_tasks_by_user = async (req, res) => {
+  //TODO: Update all priority for each task, check the day and see if it has changed priority
+  console.log(1);
   try {
     const { id } = req.user;
+
+    console.log(2);
+    const allTasks = await Task.find({ userId: id });
+    console.log("all tasks", allTasks);
+    console.log(3);
+
+    if (allTasks.length == 0) {
+      res.status(200).send(allTasks);
+      return;
+    }
 
     let returnTasks = {
       0: [],
       1: [],
       2: [],
+      3: [],
     };
-
-    console.log(id);
-
-    const allTasks = await Task.find({ userId: id });
 
     //Organize them by status
     allTasks.forEach((task) => {
       returnTasks[task.status].push(task);
     });
+
+    console.log(4);
 
     console.log(returnTasks);
 

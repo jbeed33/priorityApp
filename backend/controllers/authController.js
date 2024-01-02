@@ -7,12 +7,12 @@ require("dotenv").config();
 const createToken = async (id, name) => {
   //token expires in 10 minutes
   return await jwt.sign({ id, name }, process.env.TOKEN_KEY, {
-    expiresIn: "10m",
+    expiresIn: "30m",
   });
 };
 
 const createCookie = (createdToken) => {
-  //cookie expires in 3 minutes
+  //cookie expires in 10 minutes
   return {
     name: "authorization",
     token: createdToken,
