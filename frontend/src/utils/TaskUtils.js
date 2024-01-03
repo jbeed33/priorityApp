@@ -2,7 +2,7 @@ import format from "date-fns/format";
 
 export const PriorityLevelOptions = {
   HIGH: 3,
-  MED: 2,
+  MEDIUM: 2,
   LOW: 1,
   NONE: 0,
 };
