@@ -7,7 +7,7 @@ import ScheduleCard from "../scheduleCard/ScheduleCard";
 import TaskCard from "../taskCard/TaskCard";
 import { useEffect, useState } from "react";
 
-export default function Overview() {
+export default function Overview(props) {
   let [taskData, setTaskData] = useState([]);
 
   async function fetchData() {
@@ -37,7 +37,10 @@ export default function Overview() {
           </div>
           <h1>Tasks</h1>
 
-          <button class="overview-button">
+          <button
+            class="overview-button"
+            onClick={() => props.setAddTaskDisplay((task) => !task)}
+          >
             <FontAwesomeIcon icon={faAdd} />
             <h3>Add Task</h3>
           </button>

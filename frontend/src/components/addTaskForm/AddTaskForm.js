@@ -1,10 +1,14 @@
 import "./addTaskForm.css";
-export default function AddTaskForm() {
+export default function AddTaskForm(props) {
   return (
     <>
       <div id="form-backdrop"></div>
       <form id="add-task-form">
         <h1>Add Tasks</h1>
+        <button onClick={() => props.setAddTaskDisplay((task) => !task)}>
+          {" "}
+          X{" "}
+        </button>
         <label>Level of Priority: </label>
         <select id="priority" name="priority">
           <option value="None">None</option>
