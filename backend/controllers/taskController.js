@@ -2,6 +2,7 @@ const Task = require("../models/taskModel");
 const { v4: uuidv4 } = require("uuid");
 
 const post_create_task = async (req, res) => {
+  console.log("made it into create task");
   const taskId = uuidv4();
   const updatedAt = new Date();
   const createdAt = new Date();

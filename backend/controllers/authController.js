@@ -5,41 +5,44 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const createToken = async (id, name) => {
-  //token expires in 10 minutes
+  //token expires in 30 minutes
   return await jwt.sign({ id, name }, process.env.TOKEN_KEY, {
     expiresIn: "30m",
   });
 };
 
 const createCookie = (createdToken) => {
-  //cookie expires in 10 minutes
+  //cookie expires in ??? minutes
   return {
     name: "authorization",
     token: createdToken,
-    options: { maxAge: 600000, httpOnly: true },
+    options: { maxAge: 60000000000, httpOnly: true },
   };
 };
 
 const authorize = async (req, res, next) => {
-  const token = req.cookies["authorization"];
-  console.log(token);
+  // const token = req.cookies["authorization"];
+  // console.log("Authorizaiton token", token);
 
-  if (!token) {
-    // if they inputted email/username and password
-    //check to see if the email/username and password is correct
-    // create them one
-    return res.status(401).json({ msg: "Authorization token is missing" });
-  }
+  // if (!token) {
+  //   // if they inputted email/username and password
+  //   //check to see if the email/username and password is correct
+  //   // create them one
+  //   console.log("need a token");
+  //   //return res.status(401).json({ msg: "Authorization token is missing" });
+  // }
 
-  await jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ message: "Invalid token" });
-    }
+  // await jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
+  //   if (err) {
+  //     return res.status(401).json({ message: "Invalid token" });
+  //   }
 
-    console.log("Decode: ", decoded);
-    req.user = decoded;
-    next();
-  });
+  //   console.log("Decode: ", decoded);
+  //   req.user = decoded;
+  //   next();
+  // });
+
+  next();
 };
 
 const post_signup_user = async (req, res, next) => {
@@ -57,10 +60,10 @@ const post_signup_user = async (req, res, next) => {
 
     const newUser = new User({ userId, name, email, username, password: hash });
     await newUser.save();
-    const createdToken = await createToken(newUser.userId, name);
-    const cookie = createCookie(createdToken);
-    res.cookie(cookie.name, cookie.token, cookie.options);
-    res.status(201).send({ msg: "Account created.", token: createdToken });
+    // const createdToken = await createToken(newUser.userId, name);
+    // const cookie = createCookie(createdToken);
+    // res.cookie(cookie.name, cookie.token, cookie.options);
+    return res.status(201).send({ msg: "Account created." });
   } catch (e) {
     // still need to do a better job at error handling.
     console.error(`something went wrong in user sign up ${e}`);
@@ -68,43 +71,42 @@ const post_signup_user = async (req, res, next) => {
 };
 
 const post_login_user = async (req, res, next) => {
-  const token = req.cookies["authorization"];
-  if (!token) {
-    //check to see if user exsists, if so create token and redirect them to dashboard.
-    const { email, password } = req.body;
-    console.log("email or username: ", email);
-    console.log("password: ", password);
+  console.log("session", req.session);
+  const { email, password } = req.body;
+  console.log("email or username: ", email);
+  console.log("password: ", password);
 
-    const salt = process.env.HASH_KEY;
-    const hash = await bcrypt.hash(password, salt);
-    console.log("hash: ", hash);
-    try {
-      let foundUser = await User.findOne({ email: email })
-        .where("password")
-        .equals(hash)
-        .select("userId name");
+  const salt = process.env.HASH_KEY;
+  const hash = await bcrypt.hash(password, salt);
+  console.log("hash: ", hash);
+  try {
+    let foundUser = await User.findOne({ email: email })
+      .where("password")
+      .equals(hash)
+      .select("userId name");
 
-      console.log(foundUser);
+    console.log("Found User:", foundUser);
 
-      if (foundUser != null) {
-        const token = await createToken(foundUser.userId, foundUser.name);
-        const cookie = createCookie(token);
-        res.cookie(cookie.name, cookie.token, cookie.options);
-        res.status(200).send({ msg: "Logging In", canRedirect: true });
-      } else {
-        res.send({
-          msg: "Username or Password is incorrect.",
-          canRedirect: false,
-        });
-      }
-    } catch (e) {
-      res
-        .status(400)
-        .send({ msg: "Incorrect Username or Password", canRedirect: false });
+    if (foundUser != null) {
+      //need to create a session here return session Id to user, also need canRedirect
+
+      //const token = await createToken(foundUser.userId, foundUser.name);
+      //const cookie = createCookie(token);
+      // res.cookie(cookie.name, cookie.token, cookie.options);
+      // console.log(cookie);
+      req.session.userId = foundUser.userId;
+      console.log(req.session);
+      return res.status(200).send({ msg: "Logging In", canRedirect: true });
+    } else {
+      return res.send({
+        msg: "Username or Password is incorrect.",
+        canRedirect: false,
+      });
     }
-  } else {
-    //automatically login already have a valid cookie
-    res.status(200).send({ msg: "Logging In", canRedirect: true });
+  } catch (e) {
+    return res
+      .status(400)
+      .send({ msg: "Incorrect Username or Password", canRedirect: false });
   }
 };
 

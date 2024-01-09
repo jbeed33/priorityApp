@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
 const authRouter = require("./routes/authRoutes");
 const taskRouter = require("./routes/taskRouter");
 const cors = require("cors");
@@ -14,7 +15,16 @@ app.use(cors());
 // Need this to parse incoming strings.
 app.use(express.json());
 
-app.use(cookieParser());
+// app.use(cookieParser());
+
+app.use(
+  session({
+    secret: "top secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 3600 },
+  })
+);
 
 //Middleware
 app.use("/api/user", authRouter);

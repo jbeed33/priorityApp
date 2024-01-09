@@ -21,13 +21,6 @@ const schema = new mongoose.Schema({
     minLength: [1, "Email is too short"],
     maxLength: [320, "Email is too long"],
   },
-  username: {
-    type: String,
-    required: [true, "Please enter a username"],
-    minLength: [3, "Username is too short"],
-    maxLength: [20, "Username is too long"],
-    // need to make it unique
-  },
   password: {
     type: String,
     required: [true, "Please enter a password"],
