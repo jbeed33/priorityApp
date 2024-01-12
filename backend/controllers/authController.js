@@ -2,8 +2,10 @@ const User = require("../models/userModal");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const session = require("express-session");
 require("dotenv").config();
 
+var db = {};
 const createToken = async (id, name) => {
   //token expires in 30 minutes
   return await jwt.sign({ id, name }, process.env.TOKEN_KEY, {
@@ -20,29 +22,36 @@ const createCookie = (createdToken) => {
   };
 };
 
+const parseID = (id) => {
+  console.log("Inside parse id: " , id);
+  if(id === undefined){
+    throw new Error("id not defined");
+  }
+
+  let copyId = id.split('.')[1].split('%3A')[1];
+  return copyId;
+
+  
+
+ 
+}
+
 const authorize = async (req, res, next) => {
-  // const token = req.cookies["authorization"];
-  // console.log("Authorizaiton token", token);
+ console.log(req.cookies);
+ const sessionID = parseID(req.headers.cookie);
 
-  // if (!token) {
-  //   // if they inputted email/username and password
-  //   //check to see if the email/username and password is correct
-  //   // create them one
-  //   console.log("need a token");
-  //   //return res.status(401).json({ msg: "Authorization token is missing" });
-  // }
+ console.log("Session ID:", sessionID);
+ 
+  if(sessionID === undefined){
+     throw new Error("Invalid session ID");
+  }
 
-  // await jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
-  //   if (err) {
-  //     return res.status(401).json({ message: "Invalid token" });
-  //   }
-
-  //   console.log("Decode: ", decoded);
-  //   req.user = decoded;
-  //   next();
-  // });
-
+  console.log("key: ", sessionID);
+  console.log("value: ", db[sessionID] );
+  req.userId = db[sessionID];
   next();
+
+ 
 };
 
 const post_signup_user = async (req, res, next) => {
@@ -71,7 +80,7 @@ const post_signup_user = async (req, res, next) => {
 };
 
 const post_login_user = async (req, res, next) => {
-  console.log("session", req.session);
+
   const { email, password } = req.body;
   console.log("email or username: ", email);
   console.log("password: ", password);
@@ -89,12 +98,10 @@ const post_login_user = async (req, res, next) => {
 
     if (foundUser != null) {
       //need to create a session here return session Id to user, also need canRedirect
-
-      //const token = await createToken(foundUser.userId, foundUser.name);
-      //const cookie = createCookie(token);
-      // res.cookie(cookie.name, cookie.token, cookie.options);
-      // console.log(cookie);
+      const sessionID = req.sessionID;
       req.session.userId = foundUser.userId;
+      db[sessionID] = foundUser.userId;
+      console.log(db);
       console.log(req.session);
       return res.status(200).send({ msg: "Logging In", canRedirect: true });
     } else {

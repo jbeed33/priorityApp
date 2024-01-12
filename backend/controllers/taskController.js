@@ -1,12 +1,15 @@
 const Task = require("../models/taskModel");
 const { v4: uuidv4 } = require("uuid");
+const { db } = require("../controllers/authController");
 
 const post_create_task = async (req, res) => {
+
+
   console.log("made it into create task");
   const taskId = uuidv4();
   const updatedAt = new Date();
   const createdAt = new Date();
-  const userId = req.user.id;
+  const userId = req.userId;
 
   const {
     priority,
@@ -17,6 +20,7 @@ const post_create_task = async (req, res) => {
     mediumToHighDate,
   } = req.body;
 
+  console.log(req.body);
   try {
     const newTask = new Task({
       userId,

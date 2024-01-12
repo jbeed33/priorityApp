@@ -31,11 +31,9 @@ const schema = mongoose.Schema({
   },
   lowToMediumDate: {
     type: Date,
-    required: true,
   },
   mediumToHighDate: {
     type: Date,
-    required: true,
   },
   createdAt: {
     type: Date,
