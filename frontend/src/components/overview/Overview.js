@@ -25,7 +25,7 @@ export default function Overview(props) {
   }
 
   useEffect(() => {
-    fetchData();
+    //fetchData();
   }, []);
   return (
     <>

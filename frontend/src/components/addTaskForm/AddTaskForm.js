@@ -8,20 +8,55 @@ export default function AddTaskForm(props) {
     status: "0",
     title: "",
     details: "",
-    lowToMediumDate: null,
-    mediumToHighDate: null,
     createdAt: new Date(),
     updatedAt: new Date(),
   });
 
-  function submitForm(e) {
+  async function submitForm(e) {
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      credentials: "same-origin"
+    };
+
     e.preventDefault();
-    console.log(data);
+    try {
+      let result = await fetch("/api/task/create", options);
+      let data = await result.json();
+      console.log(data);
+
+      if (!result.ok) {
+        throw new Error("something went wrong.");
+      }
+
+    } catch (e) {
+      console.log("error" + e);
+    }
   }
 
   function changeValue(key, value) {
     let copyData = { ...data };
     copyData[key] = value.trim();
+
+    if(copyData.priority == PriorityLevelOptions.HIGH){
+        if(copyData['lowToMediumDate'] !== undefined){
+           delete copyData['lowToMediumDate'];
+        }
+
+        if(copyData['mediumToHighDate'] !== undefined){
+          delete copyData['mediumToHighDate'];
+       }
+    }
+
+    if(copyData.priority == PriorityLevelOptions.MEDIUM){
+      if(copyData['mediumToHighDate'] !== undefined){
+        delete copyData['mediumToHighDate'];
+     }
+  }
     setData(copyData);
   }
 
