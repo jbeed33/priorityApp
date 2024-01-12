@@ -59,9 +59,10 @@ const patch_update_task = async (req, res) => {
 
 const get_tasks_by_user = async (req, res) => {
   //TODO: Update all priority for each task, check the day and see if it has changed priority
+  //Maybe send notifications of what tasks got updated??
   console.log(1);
   try {
-    const { id } = req.user;
+    const id = req.userId;
 
     console.log(2);
     const allTasks = await Task.find({ userId: id });
