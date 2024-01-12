@@ -25,7 +25,7 @@ export default function Overview(props) {
   }
 
   useEffect(() => {
-    //fetchData();
+    fetchData();
   }, []);
   return (
     <>
@@ -49,18 +49,18 @@ export default function Overview(props) {
             <h1>Please add a task</h1>
           ) : (
             <div id="overiew-display">
-              <div>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
+              <div class="overiew-display-col">
+                <Card title="Do homework" details="Finish cs153 reading this is important to me and others." priority="Medium" dueDate="1/12/23" ></Card>
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
               </div>
 
-              <div>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
+              <div class="overiew-display-col">
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
+                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
               </div>
             </div>
           )}

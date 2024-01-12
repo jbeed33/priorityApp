@@ -46,6 +46,7 @@
 
 #card-container {
   width: 100%;
+  height: 37%;
   padding: 0.5em 1em;
 }
 
@@ -56,8 +57,13 @@
   margin-bottom: 1em;
 }
 
-p {
-  margin-bottom: 0.8em;
+#card-title {
+  width: 70%;
+}
+
+#card-description {
+  height: 20%;
+  margin-bottom: 2em;
 }
 
 #card-options {
@@ -66,11 +72,16 @@ p {
   justify-content: space-between;
 }
 
+
 /* Typography */
 
 #card-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
+}
+
+#card-description{
+  font-size: 14px;
 }
 
 #card-details {
