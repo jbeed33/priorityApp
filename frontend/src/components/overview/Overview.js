@@ -15,6 +15,7 @@ export default function Overview(props) {
       let res = await fetch("/api/task/tasks");
       if (res.ok) {
         let data = await res.json();
+
         setTaskData(() => data);
         console.log("dashboard data", data);
       }
@@ -48,21 +49,19 @@ export default function Overview(props) {
           {taskData.length == 0 ? (
             <h1>Please add a task</h1>
           ) : (
-            <div id="overiew-display">
-              <div class="overiew-display-col">
-                <Card title="Do homework" details="Finish cs153 reading this is important to me and others." priority="Medium" dueDate="1/12/23" ></Card>
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-              </div>
+              
+              <div id="overiew-display">
+               
+                {taskData.map( task => {
+                  return  <div class="overiew-display-col"> 
+                    <Card title={task.title} details={task.details} priority={task.priority} dueDate={"1/12/23"}></Card>
+                    </div>               })
+                }
 
-              <div class="overiew-display-col">
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-                <Card title="Do homework" details="Finish cs153 reading" priority="Medium" dueDate="1/12/23" ></Card>
-              </div>
+                
             </div>
+            
+            
           )}
         </div>
         <div class="overview-cols cols-sm">
