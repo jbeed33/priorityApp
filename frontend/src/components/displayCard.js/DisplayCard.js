@@ -17,7 +17,12 @@ export default function DisplayCard(props) {
         <h3>Details: </h3>
         <p id="display-card-description">{props.description}</p>
         <div id="display-card-button-container">
-          <button className="display-card-button">Edit</button>
+          <button
+            className="display-card-button"
+            onClick={() => props.setEditDisplay((editDisplay) => !editDisplay)}
+          >
+            Edit
+          </button>
           <button
             className="display-card-button"
             onClick={() => props.setdisplayCard((display) => !display)}

@@ -1,15 +1,16 @@
-import "./addTaskForm.css";
+import "./editTaskForm.css";
 import "../../utils/TaskUtils";
 import { PriorityLevelOptions } from "../../utils/TaskUtils";
 import { useEffect, useState } from "react";
-export default function AddTaskForm(props) {
+
+export default function EditTaskForm(props) {
   let [data, setData] = useState({
     priority: "1",
     status: "0",
-    title: "",
-    details: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    title: props.title,
+    details: props.details,
+    lowToMediumDate: props.lowToMediumDate || new Date(),
+    mediumToHighDate: props.mediumToHighDate || new Date(),
   });
 
   async function submitForm(e) {
@@ -24,7 +25,7 @@ export default function AddTaskForm(props) {
 
     e.preventDefault();
     try {
-      let result = await fetch("/api/task/create", options);
+      let result = await fetch("/api/task/edit", options);
       let data = await result.json();
       console.log(data);
 
@@ -62,8 +63,8 @@ export default function AddTaskForm(props) {
     <>
       <div id="form-backdrop"></div>
       <form id="add-task-form">
-        <h1>Add Tasks</h1>
-        <button onClick={() => props.setAddTaskDisplay((task) => !task)}>
+        <h1>Edit Task</h1>
+        <button onClick={() => props.setEditTaskDisplay((task) => !task)}>
           {" "}
           X{" "}
         </button>
@@ -71,6 +72,7 @@ export default function AddTaskForm(props) {
         <select
           id="priority"
           name="priority"
+          defaultValue={data.priority}
           onClick={(e) => changeValue("priority", e.target.value)}
           required
         >
@@ -83,6 +85,7 @@ export default function AddTaskForm(props) {
           <label>Title</label>
           <input
             type="text"
+            defaultValue={data.title}
             required
             onChange={(e) => changeValue("title", e.target.value)}
           ></input>
@@ -91,6 +94,7 @@ export default function AddTaskForm(props) {
         <div>
           <label>Details </label>
           <textarea
+            defaultValue={data.details}
             onChange={(e) => changeValue("details", e.target.value)}
           ></textarea>
         </div>
@@ -100,6 +104,7 @@ export default function AddTaskForm(props) {
             {" "}
             <label>Low to Medium </label>
             <input
+              defaultValue={data.lowToMediumDate}
               type="date"
               required
               onChange={(e) => changeValue("lowToMediumDate", e.target.value)}
@@ -112,6 +117,7 @@ export default function AddTaskForm(props) {
             <label>Medium to High </label>
             <input
               type="date"
+              defaultValue={data.mediumToHighDate}
               required
               onChange={(e) => changeValue("mediumToHighDate", e.target.value)}
             ></input>
