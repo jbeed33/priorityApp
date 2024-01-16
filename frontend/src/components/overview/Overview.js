@@ -49,22 +49,25 @@ export default function Overview(props) {
           {taskData.length == 0 ? (
             <h1>Please add a task</h1>
           ) : (
-              
-              <div id="overiew-display">
-               
-                {taskData.map( task => {
-                  return  <div class="overiew-display-col"> 
-                    <Card title={task.title} details={task.details} priority={task.priority} dueDate={"1/12/23"}></Card>
-                    </div>               })
-                }
-
-                
+            <div id="overiew-display">
+              {taskData.map((task) => {
+                return (
+                  <div class="overiew-display-col">
+                    <Card
+                      setDisplayInfo={props.setDisplayCardInfo}
+                      setDisplayCard={props.setDisplayCard}
+                      title={task.title}
+                      details={task.details}
+                      priority={task.priority}
+                      dueDate={"1/12/23"}
+                    ></Card>
+                  </div>
+                );
+              })}
             </div>
-            
-            
           )}
         </div>
-        <div class="overview-cols cols-sm">
+        {/* <div class="overview-cols cols-sm">
           <h1>Due this week</h1>
           {taskData.length == 0 ? (
             <h1>No tasks this week</h1>
@@ -76,7 +79,7 @@ export default function Overview(props) {
               <ScheduleCard></ScheduleCard>
             </div>
           )}
-        </div>
+        </div> */}
         <div class="overview-cols cols-sm">
           <h1>Goals</h1>
           <button class="overview-button">
@@ -84,22 +87,6 @@ export default function Overview(props) {
             <h3>Add Goal</h3>
           </button>
           <div id="overview-task-list-container">
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
             <TaskCard></TaskCard>
             <TaskCard></TaskCard>
             <TaskCard></TaskCard>

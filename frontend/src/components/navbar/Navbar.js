@@ -18,12 +18,12 @@ export default function Navbar() {
           <nav>
             {/* <div id="slider"></div>
             <div id="search"></div> */}
-            <button>
+            {/* <button>
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
             <button>
               <FontAwesomeIcon icon={faEnvelope} />
-            </button>
+            </button> */}
             <div id="profile">
               <img src="https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819_640.jpg"></img>
             </div>

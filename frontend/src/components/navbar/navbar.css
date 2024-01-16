@@ -79,7 +79,7 @@ nav #profile {
     max-width: 500px;
     align-items: center;
     margin-right: 0;
-    justify-content: space-between;
+    justify-content: right;
     padding: 0;
   }
 

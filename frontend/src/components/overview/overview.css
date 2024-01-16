@@ -29,7 +29,7 @@
 #overview-container {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: space-between;
+  justify-content: center;
   width: 95%;
   margin: 0 auto;
   overflow: hidden;
@@ -128,7 +128,7 @@
 @media screen and (min-width: 950px) {
   #overview-container {
     flex-direction: row;
-    gap: 1em;
+    gap: 3em;
   }
 
   #overiew-display {
