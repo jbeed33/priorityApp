@@ -3,8 +3,6 @@ const { v4: uuidv4 } = require("uuid");
 const { db } = require("../controllers/authController");
 
 const post_create_task = async (req, res) => {
-
-
   console.log("made it into create task");
   const taskId = uuidv4();
   const updatedAt = new Date();
@@ -44,6 +42,8 @@ const post_create_task = async (req, res) => {
 };
 
 const patch_update_task = async (req, res) => {
+  console.log("Inside update task");
+  console.log("Task ID: ", req.body.taskId);
   try {
     //find a task with taskId and udpate the right parts
     const task = await Task.findOneAndUpdate(
@@ -51,6 +51,9 @@ const patch_update_task = async (req, res) => {
       req.body
     );
 
+    console.log(task);
+
+    console.log("updated task");
     res.status(200).send("udpated");
   } catch (e) {
     res.status(400).send("Task update error: " + e);
@@ -74,16 +77,11 @@ const get_tasks_by_user = async (req, res) => {
       return;
     }
 
-    let returnTasks = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-    };
+    let returnTasks = [];
 
     //Organize them by status
     allTasks.forEach((task) => {
-      returnTasks[task.status].push(task);
+      returnTasks.push(task);
     });
 
     console.log(4);
