@@ -54,6 +54,7 @@ export default function Overview(props) {
                 return (
                   <div class="overiew-display-col">
                     <Card
+                      status={task.status}
                       id={task.taskId}
                       setDisplayInfo={props.setDisplayCardInfo}
                       setDisplayCard={props.setDisplayCard}

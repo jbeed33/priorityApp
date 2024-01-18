@@ -1,5 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faCheck, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faCheck,
+  faEllipsis,
+  faXmarkCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import "./card.css";
 
 export default function Card(props) {
@@ -34,10 +39,35 @@ export default function Card(props) {
     }
   }
 
+  async function deleteTask(e) {
+    e.stopPropagation();
+    const data = { taskId: props.id };
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      credentials: "same-origin",
+    };
+
+    try {
+      let data = await fetch("/api/task/delete", options);
+      let res = await data.json();
+      console.log("Response", res);
+    } catch (e) {
+      console.error("Something went wrong: ", e);
+    }
+  }
+
   console.log(props);
   return (
     <>
-      <div id="card-container" onClick={updateDashboard}>
+      <div
+        id="card-container"
+        className={props.status === 1 ? "complete" : null}
+        onClick={updateDashboard}
+      >
         <div id="card-header">
           <div id="card-title">{props.title}</div>
           <div id="card-options">
@@ -49,7 +79,11 @@ export default function Card(props) {
               />
             </button>
             <button>
-              <FontAwesomeIcon icon={faEllipsis} class="card-icon" />
+              <FontAwesomeIcon
+                onClick={(e) => deleteTask(e)}
+                icon={faXmarkCircle}
+                class="card-icon"
+              />
             </button>
           </div>
         </div>

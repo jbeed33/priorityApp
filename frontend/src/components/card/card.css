@@ -1,4 +1,8 @@
 /*styling */
+
+.complete {
+  border: 2px solid green;
+}
 #card-container {
   background-color: #0d0d0d;
   border-radius: 10px/10px;
@@ -72,7 +76,6 @@
   justify-content: space-between;
 }
 
-
 /* Typography */
 
 #card-title {
@@ -80,7 +83,7 @@
   font-weight: 500;
 }
 
-#card-description{
+#card-description {
   font-size: 14px;
 }
 
