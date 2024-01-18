@@ -8,6 +8,7 @@ export default function Card(props) {
       title: props.title,
       details: props.details,
       priority: props.priority,
+      id: props.id,
     });
     props.setDisplayCard(true);
   }

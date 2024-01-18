@@ -21,6 +21,7 @@ function Dashboard() {
       ) : null}
       {editTaskDisplay ? (
         <EditTaskForm
+          taskId={displayCardInfo.id}
           setEditTaskDisplay={setEditTaskDisplay}
           title={"test title"}
           details={"test description"}

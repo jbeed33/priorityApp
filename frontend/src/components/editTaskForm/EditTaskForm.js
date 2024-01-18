@@ -4,7 +4,10 @@ import { PriorityLevelOptions } from "../../utils/TaskUtils";
 import { useEffect, useState } from "react";
 
 export default function EditTaskForm(props) {
+  console.log("Edit task form props: ", props);
+
   let [data, setData] = useState({
+    taskId: props.taskId,
     priority: "1",
     status: "0",
     title: props.title,
@@ -15,7 +18,7 @@ export default function EditTaskForm(props) {
 
   async function submitForm(e) {
     const options = {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -38,7 +41,9 @@ export default function EditTaskForm(props) {
   }
 
   function changeValue(key, value) {
+    console.log("Inside change Value function");
     let copyData = { ...data };
+    console.log("Copy data: ", copyData);
     copyData[key] = value.trim();
 
     if (copyData.priority == PriorityLevelOptions.HIGH) {
@@ -125,7 +130,7 @@ export default function EditTaskForm(props) {
         ) : null}
 
         <button type="submit" onClick={(e) => submitForm(e)}>
-          Add Task
+          Update Task
         </button>
       </form>
     </>
