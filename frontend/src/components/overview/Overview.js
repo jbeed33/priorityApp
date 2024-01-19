@@ -8,7 +8,9 @@ import TaskCard from "../taskCard/TaskCard";
 import { useEffect, useState } from "react";
 
 export default function Overview(props) {
-  let [taskData, setTaskData] = useState([]);
+  const [taskData, setTaskData] = useState([]);
+  const [filterDisplay, setFilterDisplay] = useState(false);
+  const [filterOptions, setFilterOptions] = useState({ priority: 0 });
 
   async function fetchData() {
     try {
@@ -16,8 +18,9 @@ export default function Overview(props) {
       if (res.ok) {
         let data = await res.json();
 
-        setTaskData(() => data);
-        console.log("dashboard data", data);
+        // setTaskData(() => data);
+        setTaskData(() => filter(filterOptions, data));
+        // console.log("dashboard data", data);
       }
       if (!res.ok) console.log("made it here");
     } catch (e) {
@@ -25,14 +28,38 @@ export default function Overview(props) {
     }
   }
 
+  function filter(options, data) {
+    let filteredData = [];
+    for (const option in options) {
+      filteredData = data.filter((task) => {
+        if (task[option] === options[option]) {
+          return task;
+        }
+      });
+    }
+
+    return filteredData;
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [filterOptions]);
+
   useEffect(() => {
     fetchData();
   }, []);
   return (
     <>
+      {filterDisplay === true ? (
+        <OverviewFilter
+          setFilterOptions={setFilterOptions}
+          setFilterDisplay={setFilterDisplay}
+        ></OverviewFilter>
+      ) : null}
+
       <div id="overview-container">
         <div class="overview-cols cols-bg">
-          <div id="filter-btn">
+          <div id="filter-btn" onClick={() => setFilterDisplay(true)}>
             <h2>Filter</h2>
             <FontAwesomeIcon icon={faFilter} />
           </div>

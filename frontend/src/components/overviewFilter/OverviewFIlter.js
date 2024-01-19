@@ -1,41 +1,78 @@
 import "./overviewFilter.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faMagnifyingGlass,
-  faCaretDown,
-  faChevronCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
-export default function OverviewFilter() {
+export default function OverviewFilter(props) {
   return (
     <>
-      <div id="overview-filter" className="drop-shadow-around">
-        <div id="overview-filter-container">
-          <div id="overview-filter-header">
-            <div>
-              <h1>Filter</h1>
-            </div>
-            <FontAwesomeIcon icon={faChevronCircleDown} />
-          </div>
-          <ul id="overview-filter-scrollable-container">
-            <li>
-              <button class="overview-filter-button">High</button>
-            </li>
-            <li>
-              <button class="overview-filter-button">Medium</button>
-            </li>
-            <li>
-              <button class="overview-filter-button">Low</button>
-            </li>
-            <li>
-              <button class="overview-filter-button">None</button>
-            </li>
-            <li>
-              <button class="overview-filter-button">Complete</button>
-            </li>
-          </ul>
+      <div id="form-backdrop"></div>
+      <div id="overview-filter-container">
+        <div id="overview-filter-header">
+          <h1>Filter</h1>
+          <button id="overview-filter-close-button">
+            <FontAwesomeIcon
+              onClick={(e) => {
+                e.preventDefault();
+                props.setFilterDisplay(false);
+              }}
+              icon={faXmarkCircle}
+              class="card-icon"
+            />
+          </button>
         </div>
+
+        <ul id="overview-filter-options-container">
+          <li>
+            <button
+              class="overview-filter-button"
+              onClick={() => {
+                props.setFilterOptions({ priority: 3 });
+              }}
+            >
+              High
+            </button>
+          </li>
+          <li>
+            <button
+              class="overview-filter-button"
+              onClick={() => {
+                props.setFilterOptions({ priority: 2 });
+              }}
+            >
+              Medium
+            </button>
+          </li>
+          <li>
+            <button
+              class="overview-filter-button"
+              onClick={() => {
+                props.setFilterOptions({ priority: 1 });
+              }}
+            >
+              Low
+            </button>
+          </li>
+          <li>
+            <button
+              class="overview-filter-button"
+              onClick={() => {
+                props.setFilterOptions({ priority: 0 });
+              }}
+            >
+              None
+            </button>
+          </li>
+          <li>
+            <button
+              class="overview-filter-button"
+              onClick={() => {
+                props.setFilterOptions({ status: 1 });
+              }}
+            >
+              Complete
+            </button>
+          </li>
+        </ul>
       </div>
     </>
   );

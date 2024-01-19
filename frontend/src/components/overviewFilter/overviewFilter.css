@@ -1,15 +1,19 @@
 /* styling */
-#overview-filter {
+#overview-filter-container {
   border-radius: 10px/10px;
-}
-
-#overview-filter:hover {
-  /* border: 1px white solid; */
-}
-
-#overview-filter-scrollable-container {
-  list-style: none;
   background-color: black;
+}
+
+#overview-filter-close-button {
+  width: 2em;
+  height: 2em;
+  background-color: black;
+  border: none;
+  color: white;
+}
+
+#overview-filter-options-container {
+  list-style: none;
 }
 
 .overview-filter-button {
@@ -28,25 +32,17 @@
 
 /*Layout*/
 
-#overview-filter {
-  width: 95%;
-  margin: 1em auto;
-  overflow: hidden;
-  height: 100%;
-}
-
-#overview-filter:hover {
-  overflow: visible;
-  height: auto;
-  padding-bottom: 1em;
-  z-index: 20;
-}
-
 #overview-filter-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%; /* Need a specific value to work */
+  z-index: 50;
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin: 1em auto;
+  padding: 1em;
 }
 
 #overview-filter-header {
@@ -55,28 +51,23 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
-  padding: 0.3em;
+  padding: 1em;
 }
 
-#overview-filter-scrollable-container {
+#overview-filter-options-container {
   display: flex;
+  margin: 0 auto;
+  width: 60%;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.5em;
+  padding: 1em;
 }
 
 @media screen and (min-width: 800px) {
-  #overview-filter {
-    height: 15%;
-  }
-
-  #overview-filter-scrollable-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+  #overview-filter-container {
+    width: 40%;
   }
 }
 
