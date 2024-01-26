@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 3010;
-const THIRTYMINUTES = 1000*60*30;
+const THIRTYMINUTES = 1000 * 60 * 1;
 
 //need this to override CORS POLICY
 app.use(cors());

@@ -23,35 +23,31 @@ const createCookie = (createdToken) => {
 };
 
 const parseID = (id) => {
-  console.log("Inside parse id: " , id);
-  if(id === undefined){
-    throw new Error("id not defined");
+  console.log("Inside parse id: ", id);
+  let copyId = undefined;
+  if (id !== undefined) {
+    copyId = id.split(".")[1].split("%3A")[1];
   }
 
-  let copyId = id.split('.')[1].split('%3A')[1];
   return copyId;
-
-  
-
- 
-}
+};
 
 const authorize = async (req, res, next) => {
- console.log(req.cookies);
- const sessionID = parseID(req.headers.cookie);
+  console.log(req.cookies);
+  const sessionID = parseID(req.headers.cookie);
 
- console.log("Session ID:", sessionID);
- 
-  if(sessionID === undefined){
-     throw new Error("Invalid session ID");
+  console.log("Session ID:", sessionID);
+
+  if (sessionID === undefined) {
+    res
+      .status(401)
+      .send({ message: "authorization failed. Please try again." });
+  } else {
+    console.log("key: ", sessionID);
+    console.log("value: ", db[sessionID]);
+    req.userId = db[sessionID];
+    next();
   }
-
-  console.log("key: ", sessionID);
-  console.log("value: ", db[sessionID] );
-  req.userId = db[sessionID];
-  next();
-
- 
 };
 
 const post_signup_user = async (req, res, next) => {
@@ -80,7 +76,6 @@ const post_signup_user = async (req, res, next) => {
 };
 
 const post_login_user = async (req, res, next) => {
-
   const { email, password } = req.body;
   console.log("email or username: ", email);
   console.log("password: ", password);
@@ -118,7 +113,8 @@ const post_login_user = async (req, res, next) => {
 };
 
 const post_sign_out_user = (req, res, next) => {
-  // set cookie to empty and has a very short expiration date
+  //remove session from our database object (db)
+
   res.send({ msg: "Sign out called" });
 };
 

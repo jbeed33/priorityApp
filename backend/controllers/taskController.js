@@ -63,14 +63,11 @@ const patch_update_task = async (req, res) => {
 const get_tasks_by_user = async (req, res) => {
   //TODO: Update all priority for each task, check the day and see if it has changed priority
   //Maybe send notifications of what tasks got updated??
-  console.log(1);
   try {
     const id = req.userId;
 
-    console.log(2);
     const allTasks = await Task.find({ userId: id });
     console.log("all tasks", allTasks);
-    console.log(3);
 
     if (allTasks.length == 0) {
       res.status(200).send(allTasks);
@@ -84,8 +81,6 @@ const get_tasks_by_user = async (req, res) => {
       returnTasks.push(task);
     });
 
-    console.log(4);
-
     console.log(returnTasks);
 
     res.status(200).send(returnTasks);
@@ -98,7 +93,9 @@ const delete_task = async (req, res) => {
   try {
     const { taskId } = req.body;
 
-    await Task.deleteOne({ taskId });
+    const taskDeleted = await Task.deleteOne({ taskId });
+
+    console.log(taskDeleted);
 
     res.status(200).send({ msg: "Task deleted" });
   } catch (e) {
