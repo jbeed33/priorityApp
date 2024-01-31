@@ -11,6 +11,37 @@ body {
   background-color: #0c0b10;
 }
 
+.form-div {
+  width: 30%;
+  margin: 40px auto;
+  border: 3px solid pink;
+}
+
+form {
+  width: 90%;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+form > * {
+  margin-bottom: 1em;
+}
+
+#form-header {
+}
+
+.form-label {
+}
+
+.form-input {
+}
+
+.form-button {
+}
+
+.form-link {
+}
+
 .drop-shadow-around {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;

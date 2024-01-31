@@ -16,6 +16,22 @@ nav button,
   color: white;
 }
 
+#profile #profile-options {
+  color: white;
+  display: none;
+  list-style-type: none;
+}
+
+#profile:hover #profile-options {
+  color: white;
+  display: block;
+  border: 2px solid white;
+}
+
+#profile-options:hover li {
+  cursor: pointer;
+}
+
 nav button:hover,
 #profile:hover {
   border: 2px solid white;

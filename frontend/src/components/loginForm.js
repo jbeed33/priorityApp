@@ -78,59 +78,44 @@ export default function LoginForm(props) {
 
   return (
     <>
-      <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-        {messageInfo.isError ? (
-          <div className="bg-red-300 text-red-700 m-4 text-center">
-            <h3>{messageInfo.message}</h3>
-          </div>
-        ) : (
-          <div className="bg-green-300 text-green-700 m-4 text-center">
-            <h3>{messageInfo.message}</h3>
-          </div>
-        )}
-
-        <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">
-          Login
-        </h2>
-
+      {messageInfo.isError ? (
+        <div className="bg-red-300 text-red-700 m-4 text-center">
+          <h3>{messageInfo.message}</h3>
+        </div>
+      ) : (
+        <div className="bg-green-300 text-green-700 m-4 text-center">
+          <h3>{messageInfo.message}</h3>
+        </div>
+      )}
+      <div className="form-div">
         <form>
+          <h2 className="form-header">Login</h2>
           <div>
             <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">
-                Email
-              </label>
+              <label for="username">Email</label>
               <input
                 id="email"
                 type="email"
                 name="email"
                 required
                 onChange={(e) => handleInput(e)}
-                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
             </div>
 
             <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">
-                Password
-              </label>
+              <label for="username">Password</label>
               <input
                 id="password"
                 type="password"
                 name="password"
                 required
                 onChange={(e) => handleInput(e)}
-                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
             </div>
           </div>
 
           <div class="flex justify-evenly m-8">
-            <button
-              onClick={sumbitForm}
-              className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            >
-              Login
-            </button>
+            <button onClick={sumbitForm}>Login</button>
 
             <Link
               className="hover:underline"
@@ -140,7 +125,7 @@ export default function LoginForm(props) {
             </Link>
           </div>
         </form>
-      </section>
+      </div>
     </>
   );
 }
