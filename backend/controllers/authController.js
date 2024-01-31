@@ -45,8 +45,14 @@ const authorize = async (req, res, next) => {
   } else {
     console.log("key: ", sessionID);
     console.log("value: ", db[sessionID]);
-    req.userId = db[sessionID];
-    next();
+    if (db[sessionID] != undefined) {
+      req.userId = db[sessionID];
+      next();
+    } else {
+      res
+        .status(401)
+        .send({ message: "authorization failed. Please try again." });
+    }
   }
 };
 
@@ -114,8 +120,16 @@ const post_login_user = async (req, res, next) => {
 
 const post_sign_out_user = (req, res, next) => {
   //remove session from our database object (db)
+  let sessionKey = Object.entries(db).reduce((val) => val === req.userId);
 
-  res.send({ msg: "Sign out called" });
+  res.clearCookie("connect.sid");
+
+  if (sessionKey != undefined) {
+    delete db[sessionKey];
+    res.send({ msg: "Sign out called", redirect: true });
+  } else {
+    res.status(400).send({ message: "Sign out failed. Please try again." });
+  }
 };
 
 const patch_edit_user = (req, res, next) => {

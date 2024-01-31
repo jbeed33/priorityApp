@@ -9,14 +9,15 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 3010;
-const THIRTYMINUTES = 1000 * 60 * 1;
+const THIRTYMINUTES = 1000 * 60 * 30;
 
 //need this to override CORS POLICY
 app.use(cors());
+
 // Need this to parse incoming strings.
 app.use(express.json());
 
-// app.use(cookieParser());
+app.use(cookieParser());
 // app.set("trust proxy", 1);
 app.use(
   session({

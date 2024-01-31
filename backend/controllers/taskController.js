@@ -1,6 +1,5 @@
 const Task = require("../models/taskModel");
 const { v4: uuidv4 } = require("uuid");
-const { db } = require("../controllers/authController");
 
 const post_create_task = async (req, res) => {
   console.log("made it into create task");
