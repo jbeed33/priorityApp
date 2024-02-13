@@ -92,95 +92,66 @@ export default function RegisterForm(props) {
 
   return (
     <>
-      <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-        {messageInfo.isError ? (
-          <div className="bg-red-300 text-red-700 m-4 text-center">
-            <h3>{messageInfo.message}</h3>
-          </div>
-        ) : (
-          <div className="bg-green-300 text-green-700 m-4 text-center">
-            <h3>{messageInfo.message}</h3>
-          </div>
-        )}
+      {messageInfo.isError ? (
+        <div className="bg-red-300 text-red-700 m-4 text-center">
+          <h3>{messageInfo.message}</h3>
+        </div>
+      ) : (
+        <div className="bg-green-300 text-green-700 m-4 text-center">
+          <h3>{messageInfo.message}</h3>
+        </div>
+      )}
 
-        <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+      <form>
+        <h2 className="form-header">Priority</h2>
+        <h2 className="form-header-sub">Join us by signing up below!</h2>
+        <div className="form-input">
+          <input
+            placeholder="Name"
+            id="name"
+            type="text"
+            name="name"
+            onChange={(e) => handleInput(e)}
+            required
+          />
+        </div>
+
+        <div className="form-input">
+          <input
+            className="form-input"
+            placeholder="Email"
+            id="email"
+            type="email"
+            name="email"
+            required
+            onChange={(e) => handleInput(e)}
+          />
+        </div>
+
+        <div className="form-input">
+          <input
+            className="form-input"
+            placeholder="Password"
+            id="password"
+            type="password"
+            name="password"
+            required
+            onChange={(e) => handleInput(e)}
+          />
+        </div>
+
+        <button className="form-button" onClick={sumbitForm}>
           Register
-        </h2>
+        </button>
 
-        <form>
-          <div class="flex flex-col">
-            <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                onChange={(e) => handleInput(e)}
-                required
-                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
-            <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                required
-                onChange={(e) => handleInput(e)}
-                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
-            <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">
-                Username
-              </label>
-              <input
-                id="username"
-                type="text"
-                name="username"
-                required
-                onChange={(e) => handleInput(e)}
-                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
-
-            <div>
-              <label class="text-gray-700 dark:text-gray-200" for="username">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                required
-                onChange={(e) => handleInput(e)}
-                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
-          </div>
-
-          <div class="flex justify-evenly m-8">
-            <button
-              onClick={sumbitForm}
-              className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            >
-              Register
-            </button>
-
-            <Link
-              className="hover:underline"
-              onClick={() => props.displayLogin(true)}
-            >
-              Login User
-            </Link>
-          </div>
-        </form>
-      </section>
+        <h3>
+          {" "}
+          Already have an account?{" "}
+          <Link className="form-link" onClick={() => props.displayLogin(true)}>
+            Login
+          </Link>
+        </h3>
+      </form>
     </>
   );
 }

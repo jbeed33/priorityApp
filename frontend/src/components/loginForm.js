@@ -79,51 +79,57 @@ export default function LoginForm(props) {
   return (
     <>
       {messageInfo.isError ? (
-        <div className="bg-red-300 text-red-700 m-4 text-center">
+        <div>
           <h3>{messageInfo.message}</h3>
         </div>
       ) : (
-        <div className="bg-green-300 text-green-700 m-4 text-center">
+        <div>
           <h3>{messageInfo.message}</h3>
         </div>
       )}
       <div className="form-div">
         <form>
-          <h2 className="form-header">Login</h2>
-          <div>
-            <div>
-              <label for="username">Email</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                required
-                onChange={(e) => handleInput(e)}
-              />
-            </div>
+          <h2 className="form-header">Priority</h2>
+          <h2 className="form-header-sub">Welcome back!</h2>
 
-            <div>
-              <label for="username">Password</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                required
-                onChange={(e) => handleInput(e)}
-              />
-            </div>
+          <div className="form-input">
+            {/* <label for="username" className="form-label">
+                Email
+              </label> */}
+            <input
+              placeholder="Email"
+              id="email"
+              type="email"
+              name="email"
+              required
+              onChange={(e) => handleInput(e)}
+            />
           </div>
 
-          <div class="flex justify-evenly m-8">
-            <button onClick={sumbitForm}>Login</button>
+          <div className="form-input">
+            {/* <label for="username">Password</label> */}
+            <input
+              placeholder="password"
+              id="password"
+              type="password"
+              name="password"
+              required
+              onChange={(e) => handleInput(e)}
+            />
+          </div>
 
+          <button className="form-button" onClick={sumbitForm}>
+            Login
+          </button>
+          <h3>
+            Dont't have an account?{" "}
             <Link
-              className="hover:underline"
+              className="form-link"
               onClick={() => props.displayLogin(false)}
             >
-              Register User
-            </Link>
-          </div>
+              Sign Up
+            </Link>{" "}
+          </h3>
         </form>
       </div>
     </>
