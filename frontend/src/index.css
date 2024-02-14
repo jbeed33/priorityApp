@@ -16,9 +16,6 @@ body {
   height: 100%;
 }
 
-.form-title {
-}
-
 form {
   width: 100%;
   max-width: 510px;
@@ -31,6 +28,7 @@ form {
   background-color: #17171791;
   border-radius: 10px/10px;
   align-items: center;
+  backdrop-filter: blur(10px);
 }
 
 form > * {
@@ -68,7 +66,8 @@ form > * {
   height: 8%;
 }
 
-.form-input input {
+.form-input input,
+.form-input textarea {
   width: 100%;
   height: 100%;
   border-radius: 10px/10px;
@@ -76,9 +75,6 @@ form > * {
   border: 2px solid white;
   background-color: #212025;
   color: white;
-}
-
-.form-button {
 }
 
 .form-link {
@@ -144,4 +140,20 @@ form > * {
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  #login-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #login-message h1 {
+    margin: 0 auto;
+    width: 80%;
+    font-size: 2rem;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 1em;
+  }
 }

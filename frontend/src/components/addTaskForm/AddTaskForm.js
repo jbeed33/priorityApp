@@ -61,9 +61,13 @@ export default function AddTaskForm(props) {
   return (
     <>
       <div id="form-backdrop"></div>
-      <form id="add-task-form">
+      <form className="form-div add-task-form">
         <h1>Add Tasks</h1>
-        <button onClick={() => props.setAddTaskDisplay((task) => !task)}>
+        <button
+          className="form-button"
+          id="form-exit-button"
+          onClick={() => props.setAddTaskDisplay((task) => !task)}
+        >
           {" "}
           X{" "}
         </button>
@@ -79,7 +83,7 @@ export default function AddTaskForm(props) {
           <option value="2">Medium</option>
           <option value="1">Low</option>
         </select>
-        <div>
+        <div className="form-input">
           <label>Title</label>
           <input
             type="text"
@@ -88,7 +92,7 @@ export default function AddTaskForm(props) {
           ></input>
         </div>
 
-        <div>
+        <div className="form-input">
           <label>Details </label>
           <textarea
             onChange={(e) => changeValue("details", e.target.value)}
@@ -96,7 +100,7 @@ export default function AddTaskForm(props) {
         </div>
 
         {data.priority <= PriorityLevelOptions.LOW ? (
-          <div>
+          <div className="form-input">
             {" "}
             <label>Low to Medium </label>
             <input
@@ -108,7 +112,7 @@ export default function AddTaskForm(props) {
         ) : null}
 
         {data.priority <= PriorityLevelOptions.MEDIUM ? (
-          <div>
+          <div className="form-input">
             <label>Medium to High </label>
             <input
               type="date"
@@ -118,7 +122,11 @@ export default function AddTaskForm(props) {
           </div>
         ) : null}
 
-        <button type="submit" onClick={(e) => submitForm(e)}>
+        <button
+          className="form-button"
+          type="submit"
+          onClick={(e) => submitForm(e)}
+        >
           Add Task
         </button>
       </form>
