@@ -16,7 +16,7 @@ export default function OverviewFilter(props) {
                 props.setFilterDisplay(false);
               }}
               icon={faXmarkCircle}
-              class="card-icon"
+              className="fa-2x"
             />
           </button>
         </div>

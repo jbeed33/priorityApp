@@ -4,6 +4,10 @@
   backdrop-filter: blur(10px);
 }
 
+.form-div {
+  background-color: #3f3b3b91;
+}
+
 #form-exit-button {
   width: 10%;
   height: 5%;
