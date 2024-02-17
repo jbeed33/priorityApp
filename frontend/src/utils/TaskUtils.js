@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+import { format, parse } from "date-fns";
 
 export const PriorityLevelOptions = {
   HIGH: 3,
@@ -16,4 +16,11 @@ export function changePriortyToName(priorityLevel) {
 
 export function changeMilisecondsToDayMonthAndYear(seconds, dateFormat) {
   return seconds != null ? format(new Date(seconds), dateFormat) : " ";
+}
+
+export function changeDateToFormatYearMonthDay(date) {
+  console.log("Date: ", date);
+  let returnDate = format(date, "yyyy-MM-dd");
+  console.log(returnDate);
+  return returnDate;
 }

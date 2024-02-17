@@ -55,6 +55,7 @@ nav button:hover,
   width: 90%;
   margin-top: 2em;
   margin-bottom: 1em;
+  z-index: 10;
 }
 
 header {

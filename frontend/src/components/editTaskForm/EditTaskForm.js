@@ -1,6 +1,9 @@
 import "./editTaskForm.css";
 import "../../utils/TaskUtils";
-import { PriorityLevelOptions } from "../../utils/TaskUtils";
+import {
+  PriorityLevelOptions,
+  changeDateToFormatYearMonthDay,
+} from "../../utils/TaskUtils";
 import { useEffect, useState } from "react";
 
 export default function EditTaskForm(props) {
@@ -15,6 +18,8 @@ export default function EditTaskForm(props) {
     lowToMediumDate: props.lowToMediumDate || new Date(),
     mediumToHighDate: props.mediumToHighDate || new Date(),
   });
+
+  console.log("[edit task form] data: ", data);
 
   async function submitForm(e) {
     const options = {
@@ -67,7 +72,7 @@ export default function EditTaskForm(props) {
   return (
     <>
       <div id="form-backdrop"></div>
-      <form className="form-div add-task-form">
+      <form className="form-div-edit add-task-form">
         <h1>Edit Task</h1>
         <button
           className="form-button"
@@ -113,7 +118,9 @@ export default function EditTaskForm(props) {
             {" "}
             <label>Low to Medium </label>
             <input
-              defaultValue={data.lowToMediumDate}
+              defaultValue={changeDateToFormatYearMonthDay(
+                props.lowToMediumDate
+              )}
               type="date"
               required
               onChange={(e) => changeValue("lowToMediumDate", e.target.value)}
@@ -126,7 +133,9 @@ export default function EditTaskForm(props) {
             <label>Medium to High </label>
             <input
               type="date"
-              defaultValue={data.mediumToHighDate}
+              defaultValue={changeDateToFormatYearMonthDay(
+                props.mediumToHighDate
+              )}
               required
               onChange={(e) => changeValue("mediumToHighDate", e.target.value)}
             ></input>

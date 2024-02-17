@@ -61,7 +61,7 @@ export default function AddTaskForm(props) {
   return (
     <>
       <div id="form-backdrop"></div>
-      <form className="form-div add-task-form">
+      <form className="form-div-add add-task-form">
         <h1>Add Tasks</h1>
         <button
           className="form-button"

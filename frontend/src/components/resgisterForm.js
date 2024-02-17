@@ -51,7 +51,7 @@ export default function RegisterForm(props) {
   async function sumbitForm(e) {
     console.log(registerInfo);
 
-    if (validInput() === false) return;
+    // if (validInput() === false) return;
 
     const options = {
       method: "POST",
@@ -59,12 +59,15 @@ export default function RegisterForm(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(registerInfo),
+      credentials: "same-origin",
     };
 
     e.preventDefault();
     try {
       let result = await fetch("/api/user/signup", options);
       let data = await result.json();
+
+      console.log("Data ", data);
 
       if (!result.ok) {
         throw new Error("something went wrong.");
@@ -74,7 +77,7 @@ export default function RegisterForm(props) {
       // const cookie = new Cookies("authorization", data.token);
       // cookie.set("authorization", data.token);
       // console.log("Token", data.token);
-      reroute();
+      //reroute();
     } catch (e) {
       setMessageInfo({ message: "Error occured: " + e, isError: true });
       console.log("error");

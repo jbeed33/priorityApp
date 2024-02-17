@@ -10,7 +10,7 @@ export default function DisplayCard(props) {
         <h1 id="display-card-title">{props.title}</h1>
         <h3 id="display-card-status">Low Priority</h3>
         <div id="display-card-date-container">
-          <h5 id="display-card-date">Low to Medium: 11/12/24</h5>
+          <h5 id="display-card-date"> {`Low to Medium: ${"hi"}`}</h5>
           <h5>|</h5>
           <h5 id="display-card-title">Medium to High: 11/12/24</h5>
         </div>

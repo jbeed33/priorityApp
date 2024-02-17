@@ -4,12 +4,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(62, 62, 62, 0.436);
-  z-index: 10;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.457);
+  backdrop-filter: blur(10px);
 }
 
 #display-card-container {
-  background-color: black;
+  background-color: #3f3b3b91;
   border-radius: 10px/10px;
 }
 
@@ -27,7 +30,7 @@
   right: 0;
   margin: 0 auto;
   padding: 3em;
-  z-index: 20;
+  z-index: 100;
 }
 
 #display-card-container > * {

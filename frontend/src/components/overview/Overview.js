@@ -85,6 +85,7 @@ export default function Overview(props) {
                       id={task.taskId}
                       setDisplayInfo={props.setDisplayCardInfo}
                       setDisplayCard={props.setDisplayCard}
+                      setEditTaskDisplay={props.setEditTaskDisplay}
                       title={task.title}
                       details={task.details}
                       priority={task.priority}

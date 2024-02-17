@@ -23,10 +23,10 @@ function Dashboard() {
         <EditTaskForm
           taskId={displayCardInfo.id}
           setEditTaskDisplay={setEditTaskDisplay}
-          title={"test title"}
-          details={"test description"}
-          lowToMediumDate={"11/12/24"}
-          mediumToHighDate={"11/12/24"}
+          title={displayCardInfo.title}
+          details={displayCardInfo.details}
+          lowToMediumDate={new Date()}
+          mediumToHighDate={new Date()}
         ></EditTaskForm>
       ) : null}
 

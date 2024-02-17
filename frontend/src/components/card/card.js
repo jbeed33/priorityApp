@@ -15,7 +15,7 @@ export default function Card(props) {
       priority: props.priority,
       id: props.id,
     });
-    props.setDisplayCard(true);
+    props.setEditTaskDisplay((editDisplay) => !editDisplay);
   }
 
   async function completeTask(e) {
