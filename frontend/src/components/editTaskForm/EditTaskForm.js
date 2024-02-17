@@ -19,29 +19,63 @@ export default function EditTaskForm(props) {
     mediumToHighDate: props.mediumToHighDate || new Date(),
   });
 
+  let [errorDisplay, setErrorDisplay] = useState({
+    status: false,
+    message: "no message :)",
+  });
+
   console.log("[edit task form] data: ", data);
 
   async function submitForm(e) {
-    const options = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-      credentials: "same-origin",
-    };
-
     e.preventDefault();
-    try {
-      let result = await fetch("/api/task/edit", options);
-      let data = await result.json();
-      console.log(data);
 
-      if (!result.ok) {
-        throw new Error("something went wrong.");
+    //reset error state
+    setErrorDisplay(() => {
+      return {
+        status: false,
+        message: "",
+      };
+    });
+
+    console.log("Data priority", data.priority);
+    if (
+      new Date(data.lowToMediumDate).getMilliseconds >=
+        new Date(data.mediumToHighDate).getMilliseconds &&
+      data.priority == 1
+    ) {
+      console.log("Data does not match!!");
+      setErrorDisplay(() => {
+        console.log("dates is in wrong order.");
+        return {
+          status: true,
+          message:
+            "Cannot submit task because Low to Medium date cannot come after Medium to High Dates.",
+        };
+      });
+    } else {
+      let dataToBeAdded = { ...data };
+      dataToBeAdded.lowToMediumDate = new Date(data.lowToMediumDate);
+      dataToBeAdded.mediumToHighDate = new Date(data.mediumToHighDate);
+      const options = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToBeAdded),
+        credentials: "same-origin",
+      };
+
+      try {
+        let result = await fetch("/api/task/edit", options);
+        let data = await result.json();
+        console.log(data);
+
+        if (!result.ok) {
+          throw new Error("something went wrong.");
+        }
+      } catch (e) {
+        console.log("error" + e);
       }
-    } catch (e) {
-      console.log("error" + e);
     }
   }
 
@@ -95,6 +129,7 @@ export default function EditTaskForm(props) {
           <option value="2">Medium</option>
           <option value="1">Low</option>
         </select>
+        {errorDisplay.status ? <h3>{errorDisplay.message}</h3> : null}
         <div className="form-input">
           <label>Title</label>
           <input
@@ -113,7 +148,7 @@ export default function EditTaskForm(props) {
           ></textarea>
         </div>
 
-        {data.priority <= PriorityLevelOptions.LOW ? (
+        {data.priority == PriorityLevelOptions.LOW ? (
           <div className="form-input">
             {" "}
             <label>Low to Medium </label>
@@ -128,7 +163,8 @@ export default function EditTaskForm(props) {
           </div>
         ) : null}
 
-        {data.priority <= PriorityLevelOptions.MEDIUM ? (
+        {data.priority <= PriorityLevelOptions.MEDIUM &&
+        data.priority >= PriorityLevelOptions.LOW ? (
           <div className="form-input">
             <label>Medium to High </label>
             <input
@@ -142,11 +178,7 @@ export default function EditTaskForm(props) {
           </div>
         ) : null}
 
-        <button
-          className="form-button"
-          type="submit"
-          onClick={(e) => submitForm(e)}
-        >
+        <button className="form-button" onClick={(e) => submitForm(e)}>
           Update Task
         </button>
       </form>
