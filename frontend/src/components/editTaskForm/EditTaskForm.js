@@ -11,8 +11,8 @@ export default function EditTaskForm(props) {
 
   let [data, setData] = useState({
     taskId: props.taskId,
-    priority: "1",
-    status: "0",
+    priority: props.priority || 0,
+    status: props.status || 0,
     title: props.title,
     details: props.details,
     lowToMediumDate: props.lowToMediumDate || new Date(),
@@ -39,8 +39,8 @@ export default function EditTaskForm(props) {
 
     console.log("Data priority", data.priority);
     if (
-      new Date(data.lowToMediumDate).getMilliseconds >=
-        new Date(data.mediumToHighDate).getMilliseconds &&
+      new Date(data.lowToMediumDate).getTime() >
+        new Date(data.mediumToHighDate).getTime() &&
       data.priority == 1
     ) {
       console.log("Data does not match!!");
@@ -82,8 +82,6 @@ export default function EditTaskForm(props) {
   function changeValue(key, value) {
     console.log("Inside change Value function");
     let copyData = { ...data };
-    console.log("Copy data: ", copyData);
-    copyData[key] = value.trim();
 
     if (copyData.priority == PriorityLevelOptions.HIGH) {
       if (copyData["lowToMediumDate"] !== undefined) {
@@ -100,6 +98,10 @@ export default function EditTaskForm(props) {
         delete copyData["mediumToHighDate"];
       }
     }
+
+    console.log("Copy data: ", copyData);
+    copyData[key] = value.trim();
+    console.log("Copy data: ", copyData);
     setData(copyData);
   }
 

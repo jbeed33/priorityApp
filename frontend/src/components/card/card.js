@@ -8,12 +8,23 @@ import {
 import "./card.css";
 
 export default function Card(props) {
+  console.log(props);
   function updateDashboard() {
     props.setDisplayInfo({
       title: props.title,
       details: props.details,
       priority: props.priority,
       id: props.id,
+      lowToMediumDate: new Date(
+        props.lowToMediumDate.year,
+        props.lowToMediumDate.month,
+        props.lowToMediumDate.day
+      ),
+      mediumToHighDate: new Date(
+        props.mediumToHighDate.year,
+        props.mediumToHighDate.month,
+        props.mediumToHighDate.day
+      ),
     });
     props.setEditTaskDisplay((editDisplay) => !editDisplay);
   }

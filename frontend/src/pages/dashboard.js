@@ -22,11 +22,12 @@ function Dashboard() {
       {editTaskDisplay ? (
         <EditTaskForm
           taskId={displayCardInfo.id}
+          priority={displayCardInfo.priority}
           setEditTaskDisplay={setEditTaskDisplay}
           title={displayCardInfo.title}
           details={displayCardInfo.details}
-          lowToMediumDate={new Date()}
-          mediumToHighDate={new Date()}
+          lowToMediumDate={displayCardInfo.lowToMediumDate}
+          mediumToHighDate={displayCardInfo.mediumToHighDate}
         ></EditTaskForm>
       ) : null}
 

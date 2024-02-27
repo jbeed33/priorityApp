@@ -6,6 +6,11 @@ import { faFilter, faAdd } from "@fortawesome/free-solid-svg-icons";
 import ScheduleCard from "../scheduleCard/ScheduleCard";
 import TaskCard from "../taskCard/TaskCard";
 import { useEffect, useState } from "react";
+import {
+  PriorityLevelOptions,
+  changeDateToFormatMonthDayYear,
+  parseDate,
+} from "../../utils/TaskUtils";
 
 export default function Overview(props) {
   const [taskData, setTaskData] = useState([]);
@@ -17,7 +22,6 @@ export default function Overview(props) {
       let res = await fetch("/api/task/tasks");
       if (res.ok) {
         let data = await res.json();
-
         // setTaskData(() => data);
         setTaskData(() => filter(filterOptions, data));
         // console.log("dashboard data", data);
@@ -39,6 +43,46 @@ export default function Overview(props) {
     }
 
     return filteredData;
+  }
+
+  function getUpcomingDate(task) {
+    const lowToMed = parseDate(task.lowToMediumDate);
+
+    const medToHigh = parseDate(task.mediumToHighDate);
+    const currentTime = new Date().getTime();
+    console.log("curent time: ", currentTime);
+
+    const lowToMedDate = new Date(
+      lowToMed.year,
+      lowToMed.month,
+      lowToMed.day
+    ).getTime();
+    const mediumToHighDate = new Date(
+      medToHigh.year,
+      medToHigh.month,
+      medToHigh.day
+    ).getTime();
+
+    // if (task.priority < PriorityLevelOptions.LOW) {
+    //   return "No Date";
+    // }
+
+    // if (task.priority >= PriorityLevelOptions.HIGH) {
+    //   return mediumToHighDate || "No Date";
+    // }
+
+    console.log("Low to medium date:", lowToMedDate);
+    if (currentTime >= lowToMedDate) {
+      console.log("return low to med");
+
+      return changeDateToFormatMonthDayYear(lowToMedDate);
+    } else if (currentTime >= lowToMedDate && currentTime < mediumToHighDate) {
+      console.log("return med to high");
+      return changeDateToFormatMonthDayYear(mediumToHighDate);
+    } else {
+      console.log("Inside no date branch");
+      return "No Date";
+    }
   }
 
   useEffect(() => {
@@ -89,7 +133,9 @@ export default function Overview(props) {
                       title={task.title}
                       details={task.details}
                       priority={task.priority}
-                      dueDate={"1/12/23"}
+                      lowToMediumDate={parseDate(task.lowToMediumDate)}
+                      mediumToHighDate={parseDate(task.mediumToHighDate)}
+                      dueDate={getUpcomingDate(task)}
                     ></Card>
                   </div>
                 );

@@ -21,6 +21,22 @@ export function changeMilisecondsToDayMonthAndYear(seconds, dateFormat) {
 export function changeDateToFormatYearMonthDay(date) {
   console.log("Date: ", date);
   let returnDate = format(date, "yyyy-MM-dd");
-  console.log(returnDate);
+  console.log("Return date: ", returnDate);
   return returnDate;
+}
+
+export function changeDateToFormatMonthDayYear(date) {
+  console.log("Date: ", date);
+  let returnDate = format(date, "MM/dd/yyyy");
+  console.log("Return date: ", returnDate);
+  return returnDate;
+}
+
+export function parseDate(date) {
+  console.log(date);
+  return {
+    month: date.toString().substring(5, 7),
+    day: date.toString().substring(8, 10),
+    year: date.toString().substring(0, 4),
+  };
 }
