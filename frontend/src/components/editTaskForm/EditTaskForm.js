@@ -2,12 +2,14 @@ import "./editTaskForm.css";
 import "../../utils/TaskUtils";
 import {
   PriorityLevelOptions,
+  changeDateToFormatMonthDayYear,
   changeDateToFormatYearMonthDay,
+  parseDate,
 } from "../../utils/TaskUtils";
 import { useEffect, useState } from "react";
 
 export default function EditTaskForm(props) {
-  console.log("Edit task form props: ", props);
+  console.log("[edit task form] ", props);
 
   let [data, setData] = useState({
     taskId: props.taskId,
@@ -15,8 +17,8 @@ export default function EditTaskForm(props) {
     status: props.status || 0,
     title: props.title,
     details: props.details,
-    lowToMediumDate: props.lowToMediumDate || new Date(),
-    mediumToHighDate: props.mediumToHighDate || new Date(),
+    lowToMediumDate: props.lowToMediumDate,
+    mediumToHighDate: props.mediumToHighDate,
   });
 
   let [errorDisplay, setErrorDisplay] = useState({
@@ -80,6 +82,8 @@ export default function EditTaskForm(props) {
   }
 
   function changeValue(key, value) {
+    console.log("key", key);
+    console.log("value", value);
     console.log("Inside change Value function");
     let copyData = { ...data };
 
@@ -100,10 +104,32 @@ export default function EditTaskForm(props) {
     }
 
     console.log("Copy data: ", copyData);
+
     copyData[key] = value.trim();
+    if (key === "lowToMediumDate") {
+      let parsedDate = parseDate(value);
+      copyData[key] = new Date(
+        parsedDate.year,
+        parsedDate.month,
+        parsedDate.day
+      ).toISOString();
+    }
+
+    if (key === "mediumToHighDate") {
+      let parsedDate = parseDate(value);
+      copyData[key] = new Date(
+        parsedDate.year,
+        parsedDate.month,
+        parsedDate.day
+      ).toISOString();
+    }
     console.log("Copy data: ", copyData);
     setData(copyData);
   }
+
+  console.log("Low to medium date: ", data.lowToMediumDate);
+
+  console.log("Data low to medium date: ", data.lowToMediumDate);
 
   return (
     <>
@@ -155,9 +181,7 @@ export default function EditTaskForm(props) {
             {" "}
             <label>Low to Medium </label>
             <input
-              defaultValue={changeDateToFormatYearMonthDay(
-                props.lowToMediumDate
-              )}
+              defaultValue={data.lowToMediumDate.substring(0, 10)}
               type="date"
               required
               onChange={(e) => changeValue("lowToMediumDate", e.target.value)}
@@ -171,9 +195,7 @@ export default function EditTaskForm(props) {
             <label>Medium to High </label>
             <input
               type="date"
-              defaultValue={changeDateToFormatYearMonthDay(
-                props.mediumToHighDate
-              )}
+              defaultValue={data.mediumToHighDate.substring(0, 10)}
               required
               onChange={(e) => changeValue("mediumToHighDate", e.target.value)}
             ></input>

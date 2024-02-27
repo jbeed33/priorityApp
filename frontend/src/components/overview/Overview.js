@@ -50,7 +50,6 @@ export default function Overview(props) {
 
     const medToHigh = parseDate(task.mediumToHighDate);
     const currentTime = new Date().getTime();
-    console.log("curent time: ", currentTime);
 
     const lowToMedDate = new Date(
       lowToMed.year,
@@ -63,26 +62,31 @@ export default function Overview(props) {
       medToHigh.day
     ).getTime();
 
-    // if (task.priority < PriorityLevelOptions.LOW) {
-    //   return "No Date";
-    // }
-
-    // if (task.priority >= PriorityLevelOptions.HIGH) {
-    //   return mediumToHighDate || "No Date";
-    // }
-
-    console.log("Low to medium date:", lowToMedDate);
-    if (currentTime >= lowToMedDate) {
-      console.log("return low to med");
-
-      return changeDateToFormatMonthDayYear(lowToMedDate);
-    } else if (currentTime >= lowToMedDate && currentTime < mediumToHighDate) {
-      console.log("return med to high");
-      return changeDateToFormatMonthDayYear(mediumToHighDate);
-    } else {
-      console.log("Inside no date branch");
+    if (task.priority < PriorityLevelOptions.LOW) {
       return "No Date";
     }
+
+    if (task.priority >= PriorityLevelOptions.HIGH) {
+      return mediumToHighDate || "No Date";
+    }
+
+    console.log(currentTime < lowToMedDate);
+
+    let upcomingDate = "No Date";
+    if (currentTime <= mediumToHighDate) {
+      upcomingDate = changeDateToFormatMonthDayYear(
+        new Date(medToHigh.year, medToHigh.month, medToHigh.day)
+      );
+    }
+
+    if (currentTime < lowToMedDate) {
+      console.log("Inside this time");
+      upcomingDate = changeDateToFormatMonthDayYear(
+        new Date(lowToMed.year, lowToMed.month, lowToMed.day)
+      );
+    }
+
+    return upcomingDate;
   }
 
   useEffect(() => {
@@ -133,8 +137,8 @@ export default function Overview(props) {
                       title={task.title}
                       details={task.details}
                       priority={task.priority}
-                      lowToMediumDate={parseDate(task.lowToMediumDate)}
-                      mediumToHighDate={parseDate(task.mediumToHighDate)}
+                      lowToMediumDate={task.lowToMediumDate}
+                      mediumToHighDate={task.mediumToHighDate}
                       dueDate={getUpcomingDate(task)}
                     ></Card>
                   </div>

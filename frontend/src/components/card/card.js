@@ -15,16 +15,8 @@ export default function Card(props) {
       details: props.details,
       priority: props.priority,
       id: props.id,
-      lowToMediumDate: new Date(
-        props.lowToMediumDate.year,
-        props.lowToMediumDate.month,
-        props.lowToMediumDate.day
-      ),
-      mediumToHighDate: new Date(
-        props.mediumToHighDate.year,
-        props.mediumToHighDate.month,
-        props.mediumToHighDate.day
-      ),
+      lowToMediumDate: props.lowToMediumDate || null,
+      mediumToHighDate: props.mediumToHighDate || null,
     });
     props.setEditTaskDisplay((editDisplay) => !editDisplay);
   }

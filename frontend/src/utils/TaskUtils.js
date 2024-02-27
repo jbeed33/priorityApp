@@ -35,8 +35,8 @@ export function changeDateToFormatMonthDayYear(date) {
 export function parseDate(date) {
   console.log(date);
   return {
-    month: date.toString().substring(5, 7),
-    day: date.toString().substring(8, 10),
-    year: date.toString().substring(0, 4),
+    month: parseInt(date.toString().substring(5, 7)) - 1,
+    day: parseInt(date.toString().substring(8, 10)), // need to do an offset
+    year: parseInt(date.toString().substring(0, 4)),
   };
 }
