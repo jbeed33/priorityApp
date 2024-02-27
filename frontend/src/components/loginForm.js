@@ -49,7 +49,7 @@ export default function LoginForm(props) {
     try {
       let result = await fetch("/api/user/login", options);
       let data = await result.json();
-      console.log(data);
+      console.log("Data login form: ", data);
 
       if (!result.ok) {
         throw new Error("something went wrong.");
@@ -79,11 +79,11 @@ export default function LoginForm(props) {
   return (
     <>
       {messageInfo.isError ? (
-        <div>
+        <div class="login-error-msg">
           <h3>{messageInfo.message}</h3>
         </div>
       ) : (
-        <div>
+        <div class="login-error-msg">
           <h3>{messageInfo.message}</h3>
         </div>
       )}

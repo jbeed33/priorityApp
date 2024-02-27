@@ -4,7 +4,7 @@ import { PriorityLevelOptions } from "../../utils/TaskUtils";
 import { useEffect, useState } from "react";
 export default function AddTaskForm(props) {
   let [data, setData] = useState({
-    priority: "1",
+    priority: "0",
     status: "0",
     title: "",
     details: "",
@@ -99,7 +99,7 @@ export default function AddTaskForm(props) {
           ></textarea>
         </div>
 
-        {data.priority <= PriorityLevelOptions.LOW ? (
+        {data.priority == PriorityLevelOptions.LOW ? (
           <div className="form-input">
             {" "}
             <label>Low to Medium </label>
@@ -111,7 +111,8 @@ export default function AddTaskForm(props) {
           </div>
         ) : null}
 
-        {data.priority <= PriorityLevelOptions.MEDIUM ? (
+        {data.priority >= PriorityLevelOptions.LOW &&
+        data.priority <= PriorityLevelOptions.MEDIUM ? (
           <div className="form-input">
             <label>Medium to High </label>
             <input
