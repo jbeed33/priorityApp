@@ -11,6 +11,10 @@ body {
   background-color: #0c0b10;
 }
 
+/* use this to change the input calender color */
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 .form-div {
   background-color: transparent;
   width: 100%;
