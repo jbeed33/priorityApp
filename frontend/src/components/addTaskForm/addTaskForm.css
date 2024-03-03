@@ -39,6 +39,10 @@ option:hover {
   color: white;
 }
 
+.form-div-add input {
+  color-scheme: light;
+}
+
 /* #add-task-form {
   background-color: #1f1e24;
   border-radius: 10px/10px;

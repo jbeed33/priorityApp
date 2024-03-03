@@ -10,6 +10,7 @@ import {
   PriorityLevelOptions,
   changeDateToFormatMonthDayYear,
   parseDate,
+  changePriortyToName,
 } from "../../utils/TaskUtils";
 
 export default function Overview(props) {
@@ -136,7 +137,7 @@ export default function Overview(props) {
                       setEditTaskDisplay={props.setEditTaskDisplay}
                       title={task.title}
                       details={task.details}
-                      priority={task.priority}
+                      priority={changePriortyToName(task.priority)}
                       lowToMediumDate={task.lowToMediumDate}
                       mediumToHighDate={task.mediumToHighDate}
                       dueDate={getUpcomingDate(task)}
