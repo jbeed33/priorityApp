@@ -3,11 +3,14 @@ import "../../utils/TaskUtils";
 import { PriorityLevelOptions } from "../../utils/TaskUtils";
 import { useEffect, useState } from "react";
 export default function AddTaskForm(props) {
+  console.log("Priority level,", props);
   let [data, setData] = useState({
-    priority: "0",
+    priority: props.priority || "0",
     status: "0",
     title: "",
     details: "",
+    lowToMediumDate: new Date(),
+    mediumToHighDate: new Date(),
     createdAt: new Date(),
     updatedAt: new Date(),
   });
@@ -39,22 +42,6 @@ export default function AddTaskForm(props) {
   function changeValue(key, value) {
     let copyData = { ...data };
     copyData[key] = value.trim();
-
-    if (copyData.priority == PriorityLevelOptions.HIGH) {
-      if (copyData["lowToMediumDate"] !== undefined) {
-        delete copyData["lowToMediumDate"];
-      }
-
-      if (copyData["mediumToHighDate"] !== undefined) {
-        delete copyData["mediumToHighDate"];
-      }
-    }
-
-    if (copyData.priority == PriorityLevelOptions.MEDIUM) {
-      if (copyData["mediumToHighDate"] !== undefined) {
-        delete copyData["mediumToHighDate"];
-      }
-    }
     setData(copyData);
   }
 

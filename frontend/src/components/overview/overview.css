@@ -97,7 +97,7 @@
   margin-left: 1em;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 440px) {
   #overview-container {
     height: fit-content;
     gap: 4em;

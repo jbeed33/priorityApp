@@ -6,6 +6,7 @@ import {
   faXmarkCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./card.css";
+import { changePriortyToName } from "../../utils/TaskUtils";
 
 export default function Card(props) {
   console.log(props);
@@ -94,7 +95,9 @@ export default function Card(props) {
         <div id="card-details">
           <div className="card-status">
             <h3 className="card-status-title">Priority Lvl</h3>
-            <h3 className="card-status-detail">{props.priority}</h3>
+            <h3 className="card-status-detail">
+              {changePriortyToName(props.priority)}
+            </h3>
           </div>
           <div className="card-status">
             <h3 className="card-status-title">Upcoming Date</h3>
