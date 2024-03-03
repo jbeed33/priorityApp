@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function OverviewFilter(props) {
+  function closeFilter() {
+    props.setFilterDisplay(false);
+  }
   return (
     <>
       <div id="form-backdrop"></div>
@@ -13,7 +16,7 @@ export default function OverviewFilter(props) {
             <FontAwesomeIcon
               onClick={(e) => {
                 e.preventDefault();
-                props.setFilterDisplay(false);
+                closeFilter();
               }}
               icon={faXmarkCircle}
               className="fa-2x"
@@ -27,6 +30,7 @@ export default function OverviewFilter(props) {
               class="overview-filter-button"
               onClick={() => {
                 props.setFilterOptions(null);
+                closeFilter();
               }}
             >
               All
@@ -37,6 +41,7 @@ export default function OverviewFilter(props) {
               class="overview-filter-button"
               onClick={() => {
                 props.setFilterOptions({ priority: 3 });
+                closeFilter();
               }}
             >
               High
@@ -47,6 +52,7 @@ export default function OverviewFilter(props) {
               class="overview-filter-button"
               onClick={() => {
                 props.setFilterOptions({ priority: 2 });
+                closeFilter();
               }}
             >
               Medium
@@ -57,6 +63,7 @@ export default function OverviewFilter(props) {
               class="overview-filter-button"
               onClick={() => {
                 props.setFilterOptions({ priority: 1 });
+                closeFilter();
               }}
             >
               Low
@@ -67,6 +74,7 @@ export default function OverviewFilter(props) {
               class="overview-filter-button"
               onClick={() => {
                 props.setFilterOptions({ priority: 0 });
+                closeFilter();
               }}
             >
               None
@@ -77,6 +85,7 @@ export default function OverviewFilter(props) {
               class="overview-filter-button"
               onClick={() => {
                 props.setFilterOptions({ status: 1 });
+                closeFilter();
               }}
             >
               Complete

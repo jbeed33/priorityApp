@@ -69,8 +69,10 @@ export default function EditTaskForm(props) {
 
       try {
         let result = await fetch("/api/task/edit", options);
-        let data = await result.json();
-        console.log(data);
+        console.log("Data from edit task form: ", await result);
+        props.setEditTaskDisplay((task) => !task);
+
+        console.log("made it here edit task prop");
 
         if (!result.ok) {
           throw new Error("something went wrong.");
@@ -126,10 +128,6 @@ export default function EditTaskForm(props) {
     console.log("Copy data: ", copyData);
     setData(copyData);
   }
-
-  console.log("Low to medium date: ", data.lowToMediumDate);
-
-  console.log("Data low to medium date: ", data.lowToMediumDate);
 
   return (
     <>

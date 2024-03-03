@@ -28,8 +28,7 @@ export default function AddTaskForm(props) {
     e.preventDefault();
     try {
       let result = await fetch("/api/task/create", options);
-      let data = await result.json();
-      console.log(data);
+      props.setAddTaskDisplay((task) => !task);
 
       if (!result.ok) {
         throw new Error("something went wrong.");
