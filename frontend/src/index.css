@@ -110,6 +110,10 @@ form > * {
   z-index: -100;
 }
 
+.login-btn {
+  min-width: 50%;
+}
+
 .login-error-msg {
   text-align: center;
   margin-bottom: 1em;

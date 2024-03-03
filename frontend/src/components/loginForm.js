@@ -62,7 +62,7 @@ export default function LoginForm(props) {
         navigate("/dashboard");
       }
     } catch (e) {
-      setMessageInfo({ message: "Error occured: " + e, isError: true });
+      setMessageInfo({ message: "An error occured. Please try again later. " });
       console.log("error" + e);
     }
   }
@@ -118,7 +118,7 @@ export default function LoginForm(props) {
             />
           </div>
 
-          <button className="form-button" onClick={sumbitForm}>
+          <button className="form-button login-btn" onClick={sumbitForm}>
             Login
           </button>
           <h3>

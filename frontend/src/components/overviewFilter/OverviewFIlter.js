@@ -72,6 +72,16 @@ export default function OverviewFilter(props) {
               Complete
             </button>
           </li>
+          <li>
+            <button
+              class="overview-filter-button"
+              onClick={() => {
+                props.setFilterOptions({ status: 1 });
+              }}
+            >
+              All
+            </button>
+          </li>
         </ul>
       </div>
     </>
