@@ -15,7 +15,7 @@ import {
 export default function Overview(props) {
   const [taskData, setTaskData] = useState([]);
   const [filterDisplay, setFilterDisplay] = useState(false);
-  const [filterOptions, setFilterOptions] = useState({ priority: 0 });
+  const [filterOptions, setFilterOptions] = useState(null);
 
   async function fetchData() {
     try {
@@ -34,6 +34,7 @@ export default function Overview(props) {
 
   function filter(options, data) {
     let filteredData = [];
+    if (options == null) return data;
     for (const option in options) {
       filteredData = data.filter((task) => {
         if (task[option] === options[option]) {
