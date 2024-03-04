@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 3010;
-const THIRTYMINUTES = 1000 * 60 * 30;
+const TWODAYS = 86400000 * 2;
 
 //need this to override CORS POLICY
 app.use(cors());
@@ -24,7 +24,7 @@ app.use(
     secret: "top secret",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: THIRTYMINUTES },
+    cookie: { maxAge: TWODAYS },
   })
 );
 
