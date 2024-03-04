@@ -57,27 +57,39 @@ const authorize = async (req, res, next) => {
 };
 
 const post_signup_user = async (req, res, next) => {
+  const { name, email, username, password } = req.body;
+
   //check to see if whole uesr already exsists
   // if so send a responds that the user already exsists try again.
+  const foundUser = await User.findOne({ email: `${email}` });
 
-  let userId = uuidv4();
+  if (foundUser) {
+    res.status(409).json({ msg: "user already exists." });
+  } else {
+    let userId = uuidv4();
 
-  try {
-    const { name, email, username, password } = req.body;
+    try {
+      // hash the password
+      const salt = process.env.HASH_KEY;
+      const hash = await bcrypt.hash(password, salt);
 
-    // hash the password
-    const salt = process.env.HASH_KEY;
-    const hash = await bcrypt.hash(password, salt);
-
-    const newUser = new User({ userId, name, email, username, password: hash });
-    await newUser.save();
-    // const createdToken = await createToken(newUser.userId, name);
-    // const cookie = createCookie(createdToken);
-    // res.cookie(cookie.name, cookie.token, cookie.options);
-    return res.status(201).send({ msg: "Account created." });
-  } catch (e) {
-    // still need to do a better job at error handling.
-    console.error(`something went wrong in user sign up ${e}`);
+      const newUser = new User({
+        userId,
+        name,
+        email,
+        username,
+        password: hash,
+      });
+      await newUser.save();
+      // const createdToken = await createToken(newUser.userId, name);
+      // const cookie = createCookie(createdToken);
+      // res.cookie(cookie.name, cookie.token, cookie.options);
+      console.log("created new user", newUser);
+      return res.status(201).send({ msg: "Account created." });
+    } catch (e) {
+      // still need to do a better job at error handling.
+      console.error(`something went wrong in user sign up ${e}`);
+    }
   }
 };
 
@@ -119,17 +131,8 @@ const post_login_user = async (req, res, next) => {
 };
 
 const post_sign_out_user = (req, res, next) => {
-  //remove session from our database object (db)
-  let sessionKey = Object.entries(db).reduce((val) => val === req.userId);
-
   res.clearCookie("connect.sid");
-
-  if (sessionKey != undefined) {
-    delete db[sessionKey];
-    res.send({ msg: "Sign out called", redirect: true });
-  } else {
-    res.status(400).send({ message: "Sign out failed. Please try again." });
-  }
+  res.send({ msg: "Sign out called", redirect: true });
 };
 
 const patch_edit_user = (req, res, next) => {
