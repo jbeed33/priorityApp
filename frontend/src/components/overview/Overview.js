@@ -51,6 +51,7 @@ export default function Overview(props) {
 
     const medToHigh = parseDate(task.mediumToHighDate);
     const currentTime = new Date().getTime();
+    let upcomingDate = "No Date";
 
     const lowToMedDate = new Date(
       lowToMed.year,
@@ -68,12 +69,13 @@ export default function Overview(props) {
     }
 
     if (task.priority >= PriorityLevelOptions.HIGH) {
-      return mediumToHighDate || "No Date";
+      upcomingDate = changeDateToFormatMonthDayYear(
+        new Date(medToHigh.year, medToHigh.month, medToHigh.day)
+      );
     }
 
     console.log(currentTime < lowToMedDate);
 
-    let upcomingDate = "No Date";
     if (currentTime <= mediumToHighDate) {
       upcomingDate = changeDateToFormatMonthDayYear(
         new Date(medToHigh.year, medToHigh.month, medToHigh.day)
