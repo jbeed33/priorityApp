@@ -9,30 +9,40 @@ nav button,
   background-color: #1f1e24;
   border-radius: 50%;
   border: none;
-  width: 42px;
+  width: 100px;
   height: 42px;
   font-weight: bold;
   cursor: pointer;
-  color: white;
+  color: #3b64f7;
+  margin-top: 0.5rem;
+}
+
+nav button {
+  border-radius: 10px/ 10px;
+  position: relative;
+  left: -20px;
+}
+
+nav button:hover {
+  background-color: #333237;
 }
 
 #profile #profile-options {
-  color: white;
+  color: #3b64f7;
+  font-weight: bold;
   display: none;
   list-style-type: none;
 }
 
 #profile:hover #profile-options {
-  color: white;
+  color: #3b64f7;
   display: block;
-  border: 2px solid white;
 }
 
 #profile-options:hover li {
   cursor: pointer;
 }
 
-nav button:hover,
 #profile:hover {
   border: 2px solid white;
 }
