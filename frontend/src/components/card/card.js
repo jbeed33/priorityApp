@@ -38,6 +38,7 @@ export default function Card(props) {
       let data = await fetch("/api/task/edit", options);
       let res = await data.json();
       console.log("Response", res);
+      props.setAutoSync((sync) => !sync);
     } catch (e) {
       console.error("Something went wrong: ", e);
     }
@@ -59,6 +60,7 @@ export default function Card(props) {
       let data = await fetch("/api/task/delete", options);
       let res = await data.json();
       console.log("Response", res);
+      props.setAutoSync((sync) => !sync);
     } catch (e) {
       console.error("Something went wrong: ", e);
     }
@@ -69,7 +71,9 @@ export default function Card(props) {
     <>
       <div
         id="card-container"
-        className={props.status === 1 ? "complete" : null}
+        className={`${props.status === 1 ? "complete" : ""} ${
+          props.status === 1 ? "complete" : ""
+        } `}
         onClick={updateDashboard}
       >
         <div id="card-header">

@@ -94,7 +94,7 @@ export default function Overview(props) {
 
   useEffect(() => {
     fetchData();
-  }, [filterOptions]);
+  }, [filterOptions, props.autoSync]);
 
   useEffect(() => {
     fetchData();
@@ -143,6 +143,7 @@ export default function Overview(props) {
                       lowToMediumDate={task.lowToMediumDate}
                       mediumToHighDate={task.mediumToHighDate}
                       dueDate={getUpcomingDate(task)}
+                      setAutoSync={props.setAutoSync}
                     ></Card>
                   </div>
                 );
@@ -163,20 +164,6 @@ export default function Overview(props) {
             </div>
           )}
         </div> */}
-        <div class="overview-cols cols-sm">
-          <h1>Goals</h1>
-          <button class="overview-button">
-            <FontAwesomeIcon icon={faAdd} />
-            <h3>Add Goal</h3>
-          </button>
-          <div id="overview-task-list-container">
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-            <TaskCard></TaskCard>
-          </div>
-        </div>
       </div>
     </>
   );

@@ -33,6 +33,7 @@ export default function AddTaskForm(props) {
       if (!result.ok) {
         throw new Error("something went wrong.");
       }
+      props.setAutoSync((sync) => !sync);
     } catch (e) {
       console.log("error" + e);
     }

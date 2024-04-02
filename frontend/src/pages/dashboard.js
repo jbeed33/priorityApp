@@ -12,12 +12,16 @@ function Dashboard() {
     title: "",
     details: "",
   });
+  const [autoSync, setAutoSync] = useState(false);
 
   return (
     <>
       <Navbar></Navbar>
       {addTaskDisplay ? (
-        <AddTaskForm setAddTaskDisplay={setAddTaskDisplay}></AddTaskForm>
+        <AddTaskForm
+          setAddTaskDisplay={setAddTaskDisplay}
+          setAutoSync={setAutoSync}
+        ></AddTaskForm>
       ) : null}
       {editTaskDisplay ? (
         <EditTaskForm
@@ -28,23 +32,26 @@ function Dashboard() {
           details={displayCardInfo.details}
           lowToMediumDate={displayCardInfo.lowToMediumDate}
           mediumToHighDate={displayCardInfo.mediumToHighDate}
+          setAutoSync={setAutoSync}
         ></EditTaskForm>
       ) : null}
 
-      {displayCardDisplay ? (
+      {/* {displayCardDisplay ? (
         <DisplayCard
           title={displayCardInfo.title}
           description={displayCardInfo.details}
           setdisplayCard={setDisplayCardDisplay}
           setEditDisplay={setEditTaskDisplay}
         ></DisplayCard>
-      ) : null}
+      ) : null} */}
 
       <Overview
         setAddTaskDisplay={setAddTaskDisplay}
         setDisplayCardInfo={setDisplayCardInfo}
         setDisplayCard={setDisplayCardDisplay}
         setEditTaskDisplay={setEditTaskDisplay}
+        setAutoSync={setAutoSync}
+        autoSync={autoSync}
       ></Overview>
     </>
   );
